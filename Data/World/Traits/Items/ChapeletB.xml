@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trait visible="0" stacking="1">
+	<modifiers>
+		<modifier>
+			<effects>
+				<damage mul="0.5"/>
+				<damageTaken mul="0.15"/>
+			</effects>
+		</modifier>
+	</modifiers>
+</trait>
+	

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trait rankMax="2" category="Buff" icon="Actions/Tau/BienSuprême">
+	<modifiers>
+		<modifier>
+			<conditions>
+				<unit>
+					<allied/>
+					<faction name="Tau"/>
+				</unit>
+			</conditions>
+			<effects>
+				<healingRate mulMin="1.0" mulMax="3.0"/>
+				<feelNoPainDamageReduction addMin="0.10" addMax="0.30"/>
+			</effects>
+		</modifier>
+	</modifiers>
+</trait>

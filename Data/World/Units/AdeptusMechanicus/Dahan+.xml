@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="utf-8"?>
+<unit dlc="Supplement9">
+	<model>
+		<unit mesh="Units/AdeptusMechanicus/Dahan+"
+				material="Units/AdeptusMechanicus/Dahan+"
+				idleAnimation="Units/Necrons/SkorpekhDestroyerIdle"
+				idleAnimationCount="3"
+				idleContinuously="1"
+				normalWeight="0.1"
+				scale="1.5 1.5 1.5"
+				explosionsBone="Chest"
+				walker="1"/>
+	</model>
+	<weapons>
+		<weapon name="MyrmidonAxe+">
+			<model>
+				<weapon fireInterval="10.0"/>
+			</model>
+		</weapon>
+		<weapon name="IradCleanser+" count="2">
+			<model>
+				<projectileWeapon mesh="Weapons/AdeptusMechanicus/DahanIrad+"
+						material="Units/AdeptusMechanicus/Dahan+"
+						bone="Chest"
+						muzzleBone="StaffEffect"
+						muzzleCount="2"/>
+			</model>
+		</weapon>
+	</weapons>
+	<modifiers>
+		<modifier visible="0">
+			<effects>
+				<armor base="10"/> <!-- %armor base armor=3+ -->
+				<hitpointsMax base="12.0"/> <!-- %hitpointsMax base toughness=5 wounds=2 -->
+				<meleeAccuracy base="10"/> <!-- %meleeAccuracy base weaponSkill=4 -->
+				<meleeAttacks base="1.5"/>
+				<strengthDamage base="4.5"/> <!-- %strengthDamage base strength=4 -->
+				<!-- <meleeInitiative base="4"/> -->
+				<moraleMax base="12"/> <!-- %moraleMax base leadership=9 -->
+				<movementMax base="3"/>
+				<productionCost base="42.0"/> <!-- %productionCost base tier=7 factor=1 -->
+				<rangedAccuracy base="8"/> <!-- %rangedAccuracy base ballisticSkill=4 -->
+				<foodUpkeep base="6.0"/> <!-- %foodUpkeep base tier=6 factor=1 -->
+				<foodCost base="90.0"/> <!-- %foodCost base tier=6 factor=0.5 -->
+				<oreCost base="90.0"/> <!-- %requisitionsCost base tier=7 factor=1 -->
+				<influenceUpkeep base="8.0"/> <!-- %influenceUpkeep base tier=6 factor=2 -->
+				<influenceCost base="160.0"/> <!-- %influenceCost base tier=6 factor=2 -->
+				<itemSlots base="6"/>
+				<levelMax base="9"/>
+			</effects>
+		</modifier>
+	</modifiers>
+	<strategyModifiers>
+		<modifier>
+			<effects>
+				<increaseHeroesScore base="1.0"/>
+			</effects>
+		</modifier>
+	</strategyModifiers>
+	<actions>
+		<attack>
+			<model>
+				<action	chargeAnimation="Units/Necrons/SkorpekhDestroyerCharge"
+						beginFire="0.1"
+						endFire="1.0"
+						chargeBeginFire="0.1"
+						chargeEndFire="0.8"
+						meleeAnimation="Units/Necrons/SkorpekhDestroyerMelee"
+						meleeBeginSwing="0.1"
+						meleeEndSwing="1.5"/>
+			</model>
+		</attack>
+		<die>
+			<model>
+				<action animation="Units/Necrons/SkorpekhDestroyerDie"
+						animationCount="2"
+						sound="Units/LargeArmoredDie"
+						soundCount="4"
+						soundDelay="0.8"
+						voiceSound="Units/AdeptusMechanicus/VehicleDie"
+						voiceSoundCount="3"/>
+			</model>		
+		</die>
+		<idle>
+			<model>
+				<action animationSpeed="1.0"/>
+			</model>
+		</idle>
+		<move>
+			<model>
+				<action animation="Units/Necrons/SkorpekhDestroyerMove"
+						sound="Units/AdeptusMechanicus/OnagerDunecrawlerMove"
+						soundCount="1"/>
+			</model>
+		</move>
+		<genericUnitAbility passive="1" 
+				name="AdeptusMechanicus/TargetingOverride+"
+				icon="Traits/AdeptusMechanicus/TargetingOverride+">
+			<beginTargets>
+				<selfTarget>
+					<areas>
+						<area affects="Tile" excludeRadius="0" radius="2">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addTrait name="AdeptusMechanicus/TargetingOverride+"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+			</beginTargets>
+		</genericUnitAbility>
+		<command cooldown="3"			
+				name="AdeptusMechanicus/OmnissiahGuidance+"
+				icon="Traits/AdeptusMechanicus/OmnissiahGuidance+">
+			<model>
+				<action animation="Units/Necrons/SkorpekhDestroyerMelee"
+						meleeBeginSwing="0.1"
+						meleeEndSwing="1.5"
+						sound="Actions/HolophotonCountermeasures"/>
+			</model>
+			<beginTargets>
+				<target rangeMax="3">
+					<conditions>
+						<unit>
+							<allied/>
+							<noTrait name="AdeptusMechanicus/OmnissiahGuidance+"/>
+							<noType name="AdeptusMechanicus/Dahan+"/>
+						</unit>
+						<weapon>
+							<noTrait name="IgnoresCover"/>
+						</weapon>
+					</conditions>
+					<areas>
+						<area affects="Unit">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addTrait name="AdeptusMechanicus/OmnissiahGuidance+"/>
+										<level add="0.3"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</target>
+			</beginTargets>
+		</command>
+		<jink cooldown="3"			
+				name="AdeptusMechanicus/Beseech+"
+				icon="Traits/AdeptusMechanicus/Beseech+">
+			<model>
+				<action animation="Units/Necrons/SkorpekhDestroyerMelee"
+						meleeBeginSwing="0.1"
+						meleeEndSwing="1.5"
+						sound="Actions/FlankSpeed"/>
+			</model>
+			<beginTargets>
+				<target rangeMax="3">
+					<conditions>
+						<unit>
+							<allied/>
+							<hitpointsFraction greater="0.15"/>
+						</unit>
+					</conditions>
+					<areas>
+						<area affects="Unit">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addTrait duration="1" name="AdeptusMechanicus/Beseech+"/>
+										<hitpointsFactorFromMax add="-0.15"/>
+										<level add="0.3"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</target>
+			</beginTargets>
+		</jink>
+		<defensiveProtocols cooldown="3"
+				name="AdeptusMechanicus/IronSoul+"
+				icon="Traits/AdeptusMechanicus/IronSoul+"
+				requiredActionPoints="0"
+				consumedActionPoints="0"
+				consumedMovement="0">
+			<model>
+				<action animation="Units/Necrons/SkorpekhDestroyerMelee"
+						meleeBeginSwing="0.1"
+						meleeEndSwing="1.5"
+						sound="Actions/EnrichedRounds"/>
+			</model>		
+			<beginTargets>
+				<selfTarget>
+					<areas>
+						<area affects="Unit" radius="1">
+							<modifiers>
+								<modifier>
+									<conditions>
+										<unit>
+											<allied/>
+										</unit>
+									</conditions>
+									<effects>
+										<addTrait duration="1" name="AdeptusMechanicus/IronSoul+"/>
+										<level add="0.15"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+			</beginTargets>
+		</defensiveProtocols>
+		<genericUnitAbility passive="1" 
+				name="AdeptusMechanicus/OverloadSystems+"
+				icon="Traits/AdeptusMechanicus/OverloadSystems+"
+				rank="-1" 
+				rankMax="2">
+			<beginTargets>
+				<selfTarget>
+					<areas>
+						<area affects="Unit">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addTrait name="AdeptusMechanicus/OverloadSystems+"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+			</beginTargets>
+		</genericUnitAbility>
+		<powerOfTheMachineSpirit cooldownMin="9" cooldownMax="3"			
+				name="AdeptusMechanicus/SanctifiedOrdnance+"
+				icon="Traits/AdeptusMechanicus/SanctifiedOrdnance+"
+				rank="-1" 
+				rankMax="2">
+			<model>
+				<action animation="Units/Necrons/SkorpekhDestroyerMelee"
+						meleeBeginSwing="0.1"
+						meleeEndSwing="1.5"
+						sound="Actions/Hammerhand"/>
+			</model>
+			<beginTargets>
+				<target rangeMax="3">
+					<conditions>
+						<unit>
+							<allied/>
+							<noTrait name="AdeptusMechanicus/SanctifiedOrdnance+"/>
+						</unit>
+					</conditions>
+					<areas>
+						<area affects="Unit">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addTrait name="AdeptusMechanicus/SanctifiedOrdnance+"/>
+										<level add="0.3"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</target>
+			</beginTargets>
+		</powerOfTheMachineSpirit>
+		<stormOfFire cooldownMin="9" cooldownMax="3"			
+				name="AdeptusMechanicus/Adaptation+"
+				icon="Traits/AdeptusMechanicus/Adaptation+"
+				rank="-1" 
+				rankMax="2"
+				requiredActionPoints="0"
+				consumedActionPoints="0"
+				consumedMovement="0">
+			<model>
+				<action animation="Units/Necrons/SkorpekhDestroyerMelee"
+						meleeBeginSwing="0.1"
+						meleeEndSwing="1.5"
+						sound="Actions/Omniscope"/>
+			</model>
+			<beginTargets>
+				<target rangeMax="3">
+					<conditions>
+						<unit>
+							<allied/>
+							<noTrait name="AdeptusMechanicus/Adaptation+"/>
+						</unit>
+					</conditions>
+					<areas>
+						<area affects="Unit">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addTrait name="AdeptusMechanicus/Adaptation+"/>
+										<level add="0.3"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</target>
+			</beginTargets>
+		</stormOfFire>
+		<theEmperorsVengeance cooldown="5"
+				elite="1"
+				levelUpPriority="1"
+				rank="-1"
+				rankMax="0"
+				name="AdeptusMechanicus/ExtinctionOrder+"
+				icon="Weapons/ExtinctionOrder+">
+			<model>
+				<action animation="Units/Necrons/SkorpekhDestroyerMelee"
+						meleeBeginSwing="0.1"
+						meleeEndSwing="1.5"
+						sound="Actions/TheEmperorsVengeance"/>
+			</model>
+			<beginTargets>
+				<target rangeMax="6">
+					<conditions>
+						<unit>
+							<enemy/>
+						</unit>
+					</conditions>
+					<areas>
+						<area affects="Unit" radius="1">
+							<modifiers>
+								<modifier>
+									<conditions>
+										<unit>
+											<enemy/>
+										</unit>
+									</conditions>
+									<effects>
+										<weaponDamage weapon="ExtinctionOrder+"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+						<area affects="Unit">
+							<modifiers>
+								<modifier>
+									<conditions>
+										<unit>
+											<enemy/>
+										</unit>
+									</conditions>
+									<effects>
+										<addTrait duration="1" name="Stunned"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</target>
+			</beginTargets>
+		</theEmperorsVengeance>
+		<levelUp/>
+		<shop/>
+	</actions>
+	<traits>
+		<trait name="AdeptusMechanicus/CanticlesOfTheOmnissiah"/>
+		<trait name="ExtraInfantryArmour" requiredUpgrade="AdeptusMechanicus/ExtraInfantryArmour"/>
+		<trait name="Zealot"/>
+		<trait name="Bulky"/>
+		<trait name="Relentless"/>
+		<trait name="Rage"/>
+		<trait name="Unique"/>
+		<trait name="Hero"/>
+		<trait name="PreferredEnemy"/>
+		<trait name="FuriousCharge"/>
+		<trait name="AdeptusMechanicus/Dunestrider"/>
+		<trait name="AdeptusMechanicus/MasterMyrmidon+"/>
+		<trait name="AdeptusMechanicus/AutoVengeance+"/>
+	</traits>
+</unit>

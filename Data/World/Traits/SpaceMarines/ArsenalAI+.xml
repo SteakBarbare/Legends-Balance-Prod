@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trait visible="0" icon="Actions/SpaceMarines/Production">
+	<modifiers>
+		<modifier>
+			<conditions>
+				<player><aiControlled/></player>
+			</conditions>
+			<effects>
+				<requisitions add="30"/>
+			</effects>
+		</modifier>
+	</modifiers>
+</trait>

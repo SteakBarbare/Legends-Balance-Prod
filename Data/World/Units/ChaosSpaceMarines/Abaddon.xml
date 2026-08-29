@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="utf-8"?>
+<unit>
+	<model>
+		<unit mesh="Units/ChaosSpaceMarines/AbaddonBody"
+				material="Units/ChaosSpaceMarines/AbaddonTerminator"
+				idleAnimation="Units/SpaceMarines/TerminatorIdle"
+				idleAnimationCount="3"
+				idleContinuously="1"
+				normalWeight="0.1"
+				scale="0.8 0.8 0.8"
+				bloodBone="Chest"
+				walker="1"/>
+	</model>
+	<weapons>
+		<weapon name="TOH">
+			<model>
+				<projectileWeapon mesh="Weapons/ChaosSpaceMarines/TOH"
+						material="Units/ChaosSpaceMarines/TOH"
+						bone="RightHand"/>
+			</model>
+		</weapon>
+		<weapon name="StormBolterTOH">
+			<model>
+				<projectileWeapon mesh="Weapons/ChaosSpaceMarines/StormbolterAbaddon"
+						material="Units/ChaosSpaceMarines/AbaddonTerminator"
+						bone="RightHand"
+						muzzleBone="Muzzle0"
+						fireInterval="0.2"/>
+			</model>
+		</weapon>
+		<weapon name="Drach">
+			<model>
+				<powerWeapon effectBoundingVolume="Sword"
+				 		effectBone="Effect" 
+						mesh="Weapons/ChaosSpaceMarines/Drach"
+						material="Units/ChaosSpaceMarines/Drach"
+						bone="LeftHand"/>
+			</model>
+		</weapon>
+		<weapon name="None" enabled="0">
+			<model>
+				<projectileWeapon mesh="Units/ChaosSpaceMarines/AbaddonHead"
+						material="Units/ChaosSpaceMarines/AbaddonArmor"
+						bone="Head"/>
+			</model>
+		</weapon>
+		<weapon name="None" enabled="0">
+			<model>
+				<projectileWeapon mesh="Units/ChaosSpaceMarines/AbaddonShoulderRight"
+						material="Units/ChaosSpaceMarines/AbaddonArmor"
+						bone="RightArm0"/>
+			</model>
+		</weapon>
+		<weapon name="None" enabled="0">
+			<model>
+				<projectileWeapon mesh="Units/ChaosSpaceMarines/AbaddonShoulderLeft"
+						material="Units/ChaosSpaceMarines/AbaddonArmor"
+						bone="LeftArm0"/>
+			</model>
+		</weapon>
+		<weapon name="None" enabled="0">
+			<model>
+				<projectileWeapon mesh="Units/ChaosSpaceMarines/AbaddonCloak"
+						material="Units/ChaosSpaceMarines/AbaddonCloak"
+						bone="Chest"/>
+			</model>
+		</weapon>
+		<weapon name="None" enabled="0">
+			<model>
+				<projectileWeapon mesh="Units/ChaosSpaceMarines/AbaddonChest"
+						material="Units/ChaosSpaceMarines/AbaddonChest"
+						bone="Chest"/>
+			</model>
+		</weapon>
+		<weapon name="None" enabled="0">
+			<model>
+				<projectileWeapon mesh="Units/ChaosSpaceMarines/AbaddonLegleft"
+						material="Units/ChaosSpaceMarines/AbaddonArmor"
+						bone="LeftLeg1"/>
+			</model>
+		</weapon>
+		<weapon name="None" enabled="0">
+			<model>
+				<projectileWeapon mesh="Units/ChaosSpaceMarines/AbaddonLegright"
+						material="Units/ChaosSpaceMarines/AbaddonArmor"
+						bone="RightLeg1"/>
+			</model>
+		</weapon>
+		<weapon name="None" enabled="0">
+			<model>
+				<projectileWeapon mesh="Units/ChaosSpaceMarines/AbaddonHip"
+						material="Units/ChaosSpaceMarines/AbaddonArmor"
+						bone="Hip"/>
+			</model>
+		</weapon>
+	</weapons>
+	<modifiers>
+		<modifier visible="0">
+			<effects>
+				<armor base="10"/> <!-- %armor base armor=2+ -->
+				<hitpointsMax base="9.0"/> <!-- %hitpointsMax base toughness=4 wounds=1 -->
+				<meleeAccuracy base="10"/> <!-- %meleeAccuracy base weaponSkill=4 -->
+				<meleeAttacks base="1"/>
+				<strengthDamage base="2"/> <!-- %strengthDamage base strength=4 -->
+				<!-- <meleeInitiative base="4"/> -->
+				<moraleMax base="10"/> <!-- %moraleMax base leadership=8 -->
+				<movementMax base="3"/>
+				<itemSlots base="6"/>
+				<levelMax base="9"/>
+				<productionCost base="48.0"/> <!-- %productionCost base tier=8 factor=1 -->
+				<rangedAccuracy base="10"/> <!-- %rangedAccuracy base ballisticSkill=4 -->
+				<oreCost base="100.0"/> <!-- %requisitionsCost base tier=8 factor=1 -->
+				<influenceUpkeep base="12.0"/> <!-- %influenceUpkeep base tier=7 factor=2 -->
+				<influenceCost base="200.0"/> <!-- %influenceCost base tier=7 factor=2 -->
+				<foodUpkeep base="6.0"/> <!-- %foodUpkeep base tier=7 factor=1 -->
+				<foodCost base="100.0"/> <!-- %foodCost base tier=7 factor=0.5 -->
+			</effects>
+		</modifier>
+	</modifiers>
+	<strategyModifiers>
+		<modifier>
+			<effects>
+				<increaseHeroesScore base="1.0"/>
+			</effects>
+		</modifier>
+	</strategyModifiers>
+	<actions>
+		<attack>
+			<model>
+				<action animation="Units/SpaceMarines/TerminatorAttack"
+						beginFire="0.767"
+						endFire="2.5"
+						chargeAnimation="Units/SpaceMarines/TerminatorCharge"
+						chargeBeginFire="0.333"
+						chargeEndFire="1.433"						
+						chargeDefenseAnimation="Units/SpaceMarines/TerminatorChargeDefense"
+						chargeDefenseBeginFire="0.333"
+						chargeDefenseEndFire="1.233"						
+						meleeAnimation="Units/SpaceMarines/TerminatorMelee"
+						meleeBeginSwing="0.4"
+						meleeEndSwing="0.7"
+						meleeDefenseAnimation="Units/SpaceMarines/TerminatorMeleeDefense"
+						meleeDefenseBeginSwing="0.4"
+						meleeDefenseEndSwing="0.7"/>
+			</model>				
+		</attack>
+		<die>
+			<model>
+				<action animation="Units/SpaceMarines/TerminatorDie"
+						animationCount="2"
+						sound="Units/MediumArmoredDie"
+						soundCount="4"
+						soundDelay="0.6"
+						voiceSound="Units/SpaceMarines/InfantryDie"
+						voiceSoundCount="5"/>
+			</model>
+		</die>
+		<idle>
+			<model>
+				<action/>
+			</model>
+		</idle>
+		<move>
+			<model>
+				<action animation="Units/SpaceMarines/TerminatorMove"
+						sound="Units/SpaceMarines/TerminatorMove"
+						soundCount="1"/>
+			</model>
+		</move>
+		<ichorBlood cooldown="1" 
+				name="ChaosSpaceMarines/Overseer"
+				icon="Actions/ChaosSpaceMarines/Overseer"
+				requiredActionPoints="0"
+				requiredMovement="0"
+				consumedActionPoints="0" 
+				consumedMovement="0">
+			<model>
+				<action animation="Units/SpaceMarines/TerminatorAttack"
+						beginFire="0.767"
+						endFire="2.5"
+						sound="Actions/ChaosEliteBuff"/>
+			</model>
+			<beginTargets>
+				<target rangeMax="3">
+					<conditions>
+						<unit>
+							<allied/>
+							<noTrait name="ChaosSpaceMarines/DarkDestiny"/>
+						</unit>
+					</conditions>
+					<areas>
+						<area affects="Unit">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addTrait name="ChaosSpaceMarines/Overseer" duration="1"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+			</beginTargets>
+		</ichorBlood>
+		<ichorBlood cooldown="8"
+				name="ChaosSpaceMarines/COT"
+				icon="Actions/ChaosSpaceMarines/COT">
+			<model>
+				<action animation="Units/SpaceMarines/TerminatorAttack"
+						beginFire="0.767"
+						endFire="2.5"
+						sound="Actions/COT"/>
+			</model>
+			<modifiers>
+				<modifier visible="0">
+					<effects>
+						<influenceCost base="250"/>
+					</effects>
+				</modifier>
+			</modifiers>
+			<beginTargets>
+				<selfTarget>
+					<areas>
+						<area affects="Tile" excludeRadius="0" radius="1">
+							<modifiers>
+								<modifier visible="0">
+									<conditions>
+										<tile>
+											<land/>
+											<noUnit/>
+											<noFeature name="GravityWaves"/>
+										</tile>
+									</conditions>
+									<randomEffects count="1">
+										<addUnit name="ChaosSpaceMarines/CSMBLFlamer" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="ChaosSpaceMarines/CSMBLMeltaGun" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="ChaosSpaceMarines/CSMBLPlasma" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="ChaosSpaceMarines/HavocRCCBL" consumedAction="0" consumedMovement="0"/>
+									</randomEffects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</target>
+			</beginTargets>
+		</ichorBlood>
+		<genericUnitAbility name="ChaosSpaceMarines/Warmaster"
+				    icon="Actions/ChaosSpaceMarines/Warmaster"
+				passive="1">
+			<beginTargets>
+				<selfTarget>
+					<areas>
+						<area affects="Tile" excludeRadius="0" radius="3">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addTrait name="ChaosSpaceMarines/Warmaster"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+			</beginTargets>
+		</genericUnitAbility>
+		<hallucination cooldown="3"
+				name="ChaosSpaceMarines/TOH"
+				icon="Actions/ChaosSpaceMarines/TOH">
+			<model>
+				<action animation="Units/SpaceMarines/TerminatorAttack"
+						beginFire="0.767"
+						endFire="2.5"
+						sound="Actions/ChaosEliteDebuff"/>
+			</model>
+			<beginTargets>
+				<selfTarget>
+					<areas>
+						<area affects="Unit" radius="2">
+							<modifiers>
+								<modifier>
+									<conditions>
+										<unit>
+											<enemy/>
+										</unit>
+									</conditions>
+									<effects>
+										<morale add="-3"/>
+									</effects>
+								</modifier>
+								<modifier visible="0">
+									<conditions>
+										<unit>
+											<enemy/>
+										</unit>
+										<unit match="Any">
+											<faction name="SpaceMarines"/>
+											<faction name="AdeptusMechanicus"/>
+											<faction name="SistersOfBattle"/>
+											<faction name="AstraMilitarum"/>
+										</unit>
+									</conditions>
+									<effects>
+										<morale add="-2"/>
+									</effects>
+								</modifier>
+								<modifier visible="0">
+									<conditions>
+										<unit>
+											<enemy/>
+										</unit>
+										<unit match="Any">
+											<faction name="SistersOfBattle"/>
+											<trait name="Psyker"/>
+											<trait name="Daemon"/>
+										</unit>
+									</conditions>
+									<effects>
+										<addTrait duration="1" name="Stunned"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+			</beginTargets>
+		</hallucination>		
+		<genericUnitAbility passive="1"
+				name="ChaosSpaceMarines/Hip"
+				icon="Actions/ChaosSpaceMarines/Hip"
+				rank="-1"
+				rankMax="2"
+				levelUpPriority="0.2">
+			<beginTargets>
+				<selfTarget>
+					<areas>
+						<area affects="Unit">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addTrait name="ChaosSpaceMarines/Hip"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+			</beginTargets>
+		</genericUnitAbility>
+		<ichorBlood cooldown="3"
+				levelUpPriority="0.1"
+				rank="-1"
+				rankMax="2"
+				requiredActionPoints="0"
+				consumedActionPoints="0"
+				name="ChaosSpaceMarines/Wrath"
+				icon="Actions/ChaosSpaceMarines/Wrath">
+			<model>
+				<action animation="Units/SpaceMarines/TerminatorAttack"
+						beginFire="0.767"
+						endFire="2.5"
+						sound="Actions/ChaosBuff"/>
+			</model>
+			<beginTargets>
+				<selfTarget>
+					<areas>
+						<area affects="Unit" radius="3">
+							<modifiers>
+								<modifier>
+									<conditions>
+										<unit>
+											<allied/>
+										</unit>
+									</conditions>
+									<effects>
+										<level addMin="0.3" addMax="0.9"/>
+									</effects>
+								</modifier>
+								<modifier>
+									<conditions>
+										<unit>
+											<enemy/>
+										</unit>
+									</conditions>
+									<effects>
+										<morale addMin="-2" addMax="-6"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+			</beginTargets>
+		</ichorBlood>
+		<stormOfFire consumedMovement="0"
+				cooldown="10"
+				name="ChaosSpaceMarines/Destruction"
+				icon="Actions/ChaosSpaceMarines/Destruction"
+				levelUpPriority="0.1"
+				rank="-1"
+				rankMax="2">
+			<model>
+				<action animation="Units/SpaceMarines/TerminatorAttack"
+						beginFire="0.767"
+						endFire="2.5"
+						sound="Actions/AggressionOverride"/>
+			</model>
+			<beginTargets>
+				<target rangeMax="3">
+					<conditions>
+						<unit>
+							<allied/>		
+							<faction name="ChaosSpaceMarines"/>
+							<noTrait name="ChaosSpaceMarines/Destruction"/>
+							<noTrait name="ChaosSpaceMarines/BloodPact"/>
+							<noType name="ChaosSpaceMarines/ChaosCultist"/>
+							<noType name="ChaosSpaceMarines/ChaosSpawn"/>
+							<noType name="ChaosSpaceMarines/DarkDisciple"/>
+							<noType name="ChaosSpaceMarines/Defiler"/>
+							<noType name="ChaosSpaceMarines/Forgefiend"/>
+							<noType name="ChaosSpaceMarines/GreaterBrassScorpionOfKhorne"/>
+							<noType name="ChaosSpaceMarines/Heldrake"/>
+							<noType name="ChaosSpaceMarines/Maulerfiend"/>
+							<noType name="ChaosSpaceMarines/NoctilithCrown"/>
+							<noType name="ChaosSpaceMarines/Venomcrawler"/>
+						</unit>
+					</conditions>
+					<areas>
+						<area affects="Unit">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addTrait duration="3" name="ChaosSpaceMarines/Destruction"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+			</beginTargets>
+		</stormOfFire>
+		<incursion cooldown="15"
+				elite="1"
+				levelUpPriority="1"
+				name="ChaosSpaceMarines/AchillesBL"
+				icon="Units/ChaosSpaceMarines/AchillesBL"
+				rank="-1"
+				rankMax="0">
+			<model>
+				<action animation="Units/SpaceMarines/TerminatorAttack"
+						beginFire="0.767"
+						endFire="2.5"
+						sound="Actions/Achilles"/>
+			</model>
+			<modifiers>
+				<modifier visible="0">
+					<effects>
+						<influenceCost base="100"/>
+						<oreCost base="100"/>
+					</effects>
+				</modifier>
+			</modifiers>
+			<beginTargets>
+				<target rangeMax="1">
+					<conditions>
+						<tile>
+							<land/>
+							<noUnit/>
+							<noFeature name="GravityWaves"/>
+						</tile>
+					</conditions>
+					<areas>
+						<area affects="Tile">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addUnit name="ChaosSpaceMarines/AchillesBL" consumedAction="0" consumedMovement="0"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</target>
+			</beginTargets>
+		</incursion>
+		<levelUp/>
+		<shop/>
+	</actions>
+	<traits>
+		<trait name="Fearless"/>
+		<trait name="Bulky"/>
+		<trait name="ExtraInfantryArmour" requiredUpgrade="ChaosSpaceMarines/ExtraInfantryArmour"/>
+		<trait name="TerminatorArmour"/>
+		<trait name="Relentless"/>
+		<trait name="Hero"/>
+		<trait name="Unique"/>
+		<trait name="ChaosSpaceMarines/VeteransOfTheLongWar" requiredUpgrade="ChaosSpaceMarines/VeteransOfTheLongWar"/>
+		<trait name="ChaosSpaceMarines/ChampionOfChaos"/>
+		<trait name="ChaosSpaceMarines/MarkedbytheGods"/>
+		<trait name="ChaosSpaceMarines/BlackLegion"/>
+		<trait name="ChaosSpaceMarines/DarkDestiny"/>
+	</traits>
+</unit>

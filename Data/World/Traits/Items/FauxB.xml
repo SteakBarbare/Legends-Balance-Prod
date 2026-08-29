@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trait visible="0" stacking="1">
+	<modifiers>
+		<modifier>
+			<conditions>
+				<weapon>
+					<trait name="Melee"/>
+				</weapon>
+			</conditions>
+			<effects>
+				<lifeStealFactor add="0.01"/>
+			</effects>
+		</modifier>
+	</modifiers>
+</trait>

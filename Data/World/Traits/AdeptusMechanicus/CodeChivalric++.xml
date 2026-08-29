@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trait category="Buff" icon="Traits/AdeptusMechanicus/CodeChivalric+" stacking="1" visible="0">
+	<modifiers>
+		<modifier>
+			<effects>
+				<loyalty add="0.1"/>
+			</effects>
+		</modifier>
+	</modifiers>
+</trait>

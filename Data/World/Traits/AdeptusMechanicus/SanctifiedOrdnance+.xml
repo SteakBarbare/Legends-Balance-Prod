@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trait alwaysVisible="1"
+		category="Buff">
+	<modifiers>
+		<modifier>
+			<effects>
+				<damage mul="0.20"/>
+			</effects>
+		</modifier>
+		<modifier visible="0">
+			<conditions>
+				<unit>
+					<noTrait name="Vehicle"/>
+					<noTrait name="Fortification"/>
+					<noTrait name="MonstrousCreature"/>
+					<noTrait name="Hero"/>
+				</unit>
+			</conditions>
+			<effects>
+				<influenceUpkeep add="2"/>				
+			</effects>
+		</modifier>
+		<modifier visible="0">
+			<conditions>
+				<unit match="Any">
+					<trait name="Vehicle"/>
+					<trait name="Fortification"/>
+				</unit>
+			</conditions>
+			<effects>
+				<influenceUpkeep add="4"/>				
+			</effects>
+		</modifier>
+		<modifier visible="0">
+			<conditions>
+				<unit>
+					<trait name="Hero"/>
+				</unit>
+			</conditions>
+			<effects>
+				<influenceUpkeep add="6"/>				
+			</effects>
+		</modifier>
+		<modifier visible="0">
+			<conditions>
+				<unit match="Any">
+					<trait name="MonstrousCreature"/>
+					<trait name="SuperHeavy"/>
+					<trait name="Gargantuan"/>
+				</unit>
+			</conditions>
+			<effects>
+				<influenceUpkeep add="10"/>				
+			</effects>
+		</modifier>
+	</modifiers>
+</trait>

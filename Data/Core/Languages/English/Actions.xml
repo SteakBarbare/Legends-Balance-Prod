@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<language>
+	<!-- Artefacts -->
+	<entry name="Artefacts/Accuracy" value="<string name='Units/Neutral/Artefacts/Accuracy'/>"/>
+	<entry name="Artefacts/AccuracyDescription" value="Increases the accuracy of your units."/>
+<!--	<entry name="Artefacts/Action" value="<string name='Units/Neutral/Artefacts/Action'/>"/>
+	<entry name="Artefacts/ActionDescription" value="Increases the action of your units."/>	-->
+	<entry name="Artefacts/Armour" value="<string name='Units/Neutral/Artefacts/Armour'/>"/>
+	<entry name="Artefacts/ArmourDescription" value="Increases the armour of your units."/>
+	<entry name="Artefacts/ArmourPenetration" value="<string name='Units/Neutral/Artefacts/ArmourPenetration'/>"/>
+	<entry name="Artefacts/ArmourPenetrationDescription" value="Increases the armour penetration of your units."/>
+	<entry name="Artefacts/Attacks" value="<string name='Units/Neutral/Artefacts/Attacks'/>"/>
+	<entry name="Artefacts/AttacksDescription" value="Increases the attacks of your units."/>
+	<entry name="Artefacts/CityTier" value="<string name='Units/Neutral/Artefacts/CityTier'/>"/>
+	<entry name="Artefacts/CityTierDescription" value="Increases the radius of your cities."/>
+	<entry name="Artefacts/Damage" value="<string name='Units/Neutral/Artefacts/Damage'/>"/>
+	<entry name="Artefacts/DamageDescription" value="Increases the damage of your units."/>
+	<entry name="Artefacts/DamageReturn" value="<string name='Units/Neutral/Artefacts/DamageReturn'/>"/>
+	<entry name="Artefacts/DamageReturnDescription" value="Returns some damage dealt to your units."/>
+	<entry name="Artefacts/Features" value="<string name='Units/Neutral/Artefacts/Features'/>"/>
+	<entry name="Artefacts/FeaturesDescription" value="Increases the resources from features."/>
+	<entry name="Artefacts/Healing" value="<string name='Units/Neutral/Artefacts/Healing'/>"/>
+	<entry name="Artefacts/HealingDescription" value="Restores hitpoints of your units each turn."/>
+	<entry name="Artefacts/Hitpoints" value="<string name='Units/Neutral/Artefacts/Hitpoints'/>"/>
+	<entry name="Artefacts/HitpointsDescription" value="Increases the hitpoints of your units."/>
+	<entry name="Artefacts/Invulnerable" value="<string name='Units/Neutral/Artefacts/Invulnerable'/>"/>
+	<entry name="Artefacts/InvulnerableDescription" value="Increases the damage reduction of your units."/>
+<!--	<entry name="Artefacts/Leeching" value="<string name='Units/Neutral/Artefacts/Leeching'/>"/>
+	<entry name="Artefacts/LeechingDescription" value="Restores hitpoints of your units each attack."/>	-->
+	<entry name="Artefacts/Loyalty" value="<string name='Units/Neutral/Artefacts/Loyalty'/>"/>
+	<entry name="Artefacts/LoyaltyDescription" value="Increases the loyalty of your cities."/>
+	<entry name="Artefacts/MoraleLoss" value="<string name='Units/Neutral/Artefacts/MoraleLoss'/>"/>
+	<entry name="Artefacts/MoraleLossDescription" value="Reduces the morale lost by your units."/>
+	<entry name="Artefacts/MoraleMax" value="<string name='Units/Neutral/Artefacts/MoraleMax'/>"/>
+	<entry name="Artefacts/MoraleMaxDescription" value="Increases the morale of your units."/>
+	<entry name="Artefacts/Movement" value="<string name='Units/Neutral/Artefacts/Movement'/>"/>
+	<entry name="Artefacts/MovementDescription" value="Increases the movement of your units."/>
+	<entry name="Artefacts/Range" value="<string name='Units/Neutral/Artefacts/Range'/>"/>
+	<entry name="Artefacts/RangeDescription" value="Increases the range of your units."/>
+	<entry name="Artefacts/Sight" value="<string name='Units/Neutral/Artefacts/Sight'/>"/>
+	<entry name="Artefacts/SightDescription" value="Increases the sight of your units."/>
+
+	<entry name="DeployMoarScrap" value="Deploy %1%"/>
+	<entry name="DeployMoarScrapHint" value="<style name='Title'/>Deploy %1%%2%<style name='Default'/><br/>%3%%4%%5%%6%%7%%8%<style name='Italic'/>%9%"/>
+</language>

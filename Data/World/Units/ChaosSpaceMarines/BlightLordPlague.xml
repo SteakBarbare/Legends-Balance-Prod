@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<unit>
+	<model>
+		<unit mesh="Units/SpaceMarines/Terminator"
+				material="Units/ChaosSpaceMarines/Thagus"
+				idleAnimation="Units/SpaceMarines/TerminatorIdle"
+				idleAnimationCount="3"
+				idleContinuously="1"
+				normalWeight="0.1"
+				scale="0.9 0.9 0.9"
+				bloodBone="Chest"
+				walker="1"/>
+	</model>
+	<group size="5" rowSize="3" memberDeltaX="80" memberDeltaY="70"/>
+	<weapons>
+		<weapon name="Plaguespewer">
+			<model>
+				<projectileWeapon mesh="Weapons/SpaceMarines/Bolter"
+						material="Units/ChaosSpaceMarines/PlagueBolter"
+						bone="RightHand"
+						muzzleBone="Muzzle0"
+						fireInterval="0.2"
+						scale="1.5 2.0 1.5"/>
+			</model>
+		</weapon>
+		<weapon name="BlightLauncher" slotName="BlightLauncher" enabled="0">
+			<model>
+				<projectileWeapon mesh="Weapons/SpaceMarines/StormBolter"
+						material="Units/ChaosSpaceMarines/Thagus"
+						bone="LeftHand"
+						muzzleBone="Muzzle0"
+						fireInterval="0.7"/>
+			</model>
+		</weapon>
+		<weapon name="PowerFist">
+			<model>
+				<weapon fireInterval="3.0"/>
+			</model>
+		</weapon>
+	</weapons>
+	<modifiers>
+		<modifier visible="0">
+			<effects>
+				<armor base="10"/> <!-- %armor base armor=2+ -->
+				<hitpointsMax base="3.0"/> <!-- %hitpointsMax base toughness=4 wounds=1 -->
+				<meleeAccuracy base="8"/> <!-- %meleeAccuracy base weaponSkill=4 -->
+				<meleeAttacks base="1"/>
+				<rangedAttacks base="1"/>
+				<strengthDamage base="1.5"/> <!-- %strengthDamage base strength=4 -->
+				<!-- <meleeInitiative base="4"/> -->
+				<moraleMax base="10"/> <!-- %moraleMax base leadership=8 -->
+				<movementMax base="3"/>
+				<productionCost base="48.0"/> <!-- %productionCost base tier=8 factor=1 -->
+				<rangedAccuracy base="8"/> <!-- %rangedAccuracy base ballisticSkill=4 -->
+				<foodUpkeep base="5.0"/> <!-- %requisitionsUpkeep base tier=8 factor=1 -->
+				<oreCost base="50.0"/> <!-- %requisitionsCost base tier=8 factor=1 -->
+				<foodCost base="50.0"/> <!-- %requisitionsCost base tier=8 factor=1 -->
+			</effects>
+		</modifier>
+	</modifiers>
+	<strategyModifiers>
+		<modifier>
+			<effects>
+				<increaseInfantryScore base="1.0"/>
+			</effects>
+		</modifier>
+	</strategyModifiers>
+	<actions>
+		<attack>
+			<model>
+				<action animation="Units/SpaceMarines/TerminatorAttack"
+						beginFire="0.767"
+						endFire="2.5"
+						chargeAnimation="Units/SpaceMarines/TerminatorCharge"
+						chargeBeginFire="0.333"
+						chargeEndFire="1.433"						
+						chargeDefenseAnimation="Units/SpaceMarines/TerminatorChargeDefense"
+						chargeDefenseBeginFire="0.333"
+						chargeDefenseEndFire="1.233"						
+						meleeAnimation="Units/SpaceMarines/TerminatorMelee"
+						meleeBeginSwing="0.4"
+						meleeEndSwing="0.7"
+						meleeDefenseAnimation="Units/SpaceMarines/TerminatorMeleeDefense"
+						meleeDefenseBeginSwing="0.4"
+						meleeDefenseEndSwing="0.7"/>
+			</model>				
+		</attack>
+		<die>
+			<model>
+				<action animation="Units/SpaceMarines/TerminatorDie"
+						animationCount="2"
+						sound="Units/MediumArmoredDie"
+						soundCount="4"
+						soundDelay="0.6"
+						voiceSound="Units/SpaceMarines/InfantryDie"
+						voiceSoundCount="5"/>
+			</model>
+		</die>
+		<idle>
+			<model>
+				<action/>
+			</model>
+		</idle>
+		<move>
+			<model>
+				<action animation="Units/SpaceMarines/TerminatorMove"
+						sound="Units/SpaceMarines/TerminatorMove"
+						soundCount="1"/>
+			</model>
+		</move>
+		<useWeapon cooldown="3"
+				weaponSlotName="BlightLauncher">
+			<model>
+				<action animation="Units/SpaceMarines/TerminatorAttack"
+						beginFire="0.767"
+						endFire="2.5"/>
+			</model>			
+			<beginTargets>
+				<target rangeMax="2">
+					<conditions>
+						<unit>
+							<enemy/>
+						</unit>
+					</conditions>
+				</target>
+			</beginTargets>
+		</useWeapon>
+		<genericUnitAbility name="ChaosSpaceMarines/ToxineZone"
+					icon="Actions/ChaosSpaceMarines/Toxine"
+				passive="1">
+			<beginTargets>
+				<selfTarget>
+					<areas>
+						<area affects="Tile" excludeRadius="0" radius="1">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addTrait name="ChaosSpaceMarines/ToxineZone"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+			</beginTargets>
+		</genericUnitAbility>
+	</actions>
+	<traits>
+		<trait name="Fearless"/>
+		<trait name="Bulky"/>
+		<trait name="ExtraInfantryArmour" requiredUpgrade="ChaosSpaceMarines/ExtraInfantryArmour"/>
+		<trait name="TerminatorArmour"/>
+		<trait name="Relentless"/>
+		<trait name="ChaosSpaceMarines/MarkOfNurgle"/>
+		<trait name="ChaosSpaceMarines/DeathGuardElite"/>
+	</traits>
+</unit>

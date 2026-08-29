@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trait alwaysVisible="1" category="Buff" icon="Actions/SistersOfBattle/SaintInTheMaking">
+	<modifiers>
+		<modifier>
+			<effects>
+				<damage mul="0.1"/>
+				<moraleLossFactor add="-0.1"/>
+			</effects>
+		</modifier>
+	</modifiers>
+</trait>

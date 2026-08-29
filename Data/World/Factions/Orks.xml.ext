@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<faction>
+	<actions>
+		<deployFortress cooldown="10"
+				icon="Units/Orks/Scrap+"
+				name="DeployMoarScrap"
+				unit="Orks/Scrap+"
+				requiredUpgrade="Orks/Gretchin+">
+			<model>
+				<action sound="Explosions/DefaultLarge"
+						soundCount="5"/>
+			</model>
+			<modifiers>
+				<modifier requiredUpgrade="Orks/CityTier2">
+					<effects>
+						<cooldown add="-2"/>
+					</effects>
+				</modifier>
+				<modifier requiredUpgrade="Orks/CityTier3">
+					<effects>
+						<cooldown add="-3"/>
+					</effects>
+				</modifier>
+			</modifiers>
+			<beginTargets>
+				<target rangeMax="-1">
+					<conditions>
+						<tile>
+							<land/>
+							<noEnemyCity/>
+							<noUnit/>
+							<noFeature name="GravityWaves"/>
+							<noFeature name="ImperialRuin"/>
+						</tile>
+					</conditions>
+				</target>
+			</beginTargets>
+		</deployFortress>
+	</actions>
+</faction>

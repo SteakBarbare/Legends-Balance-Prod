@@ -1,0 +1,794 @@
+<?xml version="1.0" encoding="utf-8"?>
+<unit>
+	<model>
+		<unit mesh="Units/Necrons/Trazyn+"
+				material="Units/Necrons/Trazyn+"
+				idleAnimation="Units/Necrons/LordIdle"
+				idleAnimationCount="3"
+				idleContinuously="1"
+				normalWeight="0.1"
+				scale="1.2 1.2 1.2"
+				explosionsBone="BloodBone"
+				walker="1"/>
+	</model>
+	<weapons>
+		<weapon name="EmpathicObliterator">
+			<model>
+				<beamWeapon mesh="Weapons/Necrons/TrazynStaff+"
+						material="Units/Necrons/Trazyn+"
+						muzzleBone=".Muzzle"
+						bone="Bone074(mirrored)002"
+						fireInterval="0.2"/>
+			</model>
+		</weapon>
+	</weapons>
+	<modifiers>
+		<modifier visible="0">
+			<effects>
+				<armor base="8"/> <!-- %armor base armor=3+ -->
+				<energyCost base="80.0"/> <!-- %energyCost base tier=6 factor=1 -->
+				<hitpointsMax base="10.0"/> <!-- %hitpointsMax base toughness=5 wounds=3 -->
+				<influenceUpkeep base="8.0"/> <!-- %influenceUpkeep base tier=6 factor=2 -->
+				<influenceCost base="160.0"/> <!-- %influenceCost base tier=6 factor=2 -->
+				<itemSlots base="9"/>
+				<levelMax base="9"/>
+				<meleeAccuracy base="8"/> <!-- %meleeAccuracy base weaponSkill=4 -->
+				<meleeAttacks base="2"/>
+				<strengthDamage base="2"/> <!-- %strengthDamage base strength=5 -->
+				<!-- <meleeInitiative base="2"/> -->
+				<moraleMax base="12"/> <!-- %moraleMax base leadership=10 -->
+				<movementMax base="3"/>
+				<oreUpkeep base="4.0"/> <!-- %oreUpkeep base tier=6 factor=1 -->
+				<productionCost base="36.0"/> <!-- %productionCost base tier=6 factor=1 -->
+				<rangedAccuracy base="8"/> <!-- %rangedAccuracy base ballisticSkill=4 -->
+			</effects>
+		</modifier>
+	</modifiers>
+	<strategyModifiers>
+		<modifier>
+			<effects>
+				<increaseHeroesScore base="1.0"/>
+			</effects>
+		</modifier>
+	</strategyModifiers>
+	<actions>
+		<attack>
+			<model>
+				<action	animation="Units/Necrons/LordAttack"
+						beginFire="0.6"
+						endFire="2.0"
+						chargeAnimation="Units/Necrons/LordCharge"
+						chargeBeginFire="0.5"
+						chargeEndFire="1.5"
+						chargeDefenseAnimation="Units/Necrons/LordChargeDefense"
+						chargeDefenseBeginFire="0.5"
+						chargeDefenseEndFire="1.5"
+						meleeAnimation="Units/Necrons/LordMelee"
+						meleeDefenseAnimation="Units/Necrons/LordMeleeDefense"
+						meleeBeginSwing="0.2"
+						meleeEndSwing="0.9"/>
+			</model>
+		</attack>
+		<die>
+			<model>
+				<action animation="Units/Necrons/LordDie"
+						animationCount="1"
+						sound="Units/MediumArmoredDie"
+						soundCount="4"
+						soundDelay="1.7"
+						voiceSound="Units/Necrons/Die"
+						voiceSoundCount="7"/>
+			</model>		
+		</die>
+		<idle>
+			<model>
+				<action animationSpeed="1.0"/>
+			</model>
+		</idle>
+		<move>
+			<model>
+				<action animation="Units/Necrons/LordMove"
+						sound="Units/Necrons/InfantryMove"
+						soundCount="4"/>
+			</model>
+		</move>
+		<necrodermisRepair consumedActionPoints="0" consumedMovement="0"
+				cooldown="1"
+				name="Necrons/NecrodermisRepair"
+				requiredActionPoints="0">
+			<model>
+				<action sound="Actions/Heal"/>
+			</model>
+			<modifiers>
+				<modifier visible="0">
+					<effects>
+						<influenceCost base="60"/>
+					</effects>
+				</modifier>
+				<modifier requiredUpgrade="Necrons/NecrodermisRepair3">
+					<effects>
+						<cooldown max="0"/>
+					</effects>
+				</modifier>
+			</modifiers>
+			<conditions>
+				<unit>
+					<damaged/>
+				</unit>
+			</conditions>
+			<beginTargets>
+				<selfTarget>
+					<areas>
+						<area affects="Unit">
+							<modifiers>
+								<modifier>
+									<effects>
+										<hitpoints add="6"/>
+									</effects>
+								</modifier>
+								<modifier requiredUpgrade="Necrons/NecrodermisRepair2">
+									<effects>
+										<hitpoints add="2"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+			</beginTargets>
+		</necrodermisRepair>
+		<dimensionalCorridor cooldown="3"
+				name="Necrons/DimensionalCorridor"
+				requiredUpgrade="Necrons/DimensionalCorridor"> <!-- growing and shrinking lens flare -->
+			<model>
+				<action sound="Actions/Teleport"/>
+			</model>
+			<modifiers>
+				<modifier visible="0">
+					<effects>
+						<influenceCost base="30"/>
+					</effects>
+				</modifier>
+				<modifier requiredUpgrade="Necrons/DimensionalCorridor2">
+					<effects>
+						<influenceCost mul="-0.33"/>
+					</effects>
+				</modifier>
+				<modifier requiredUpgrade="Necrons/DimensionalCorridor3">
+					<effects>
+						<consumedActionPoints max="0"/>
+						<consumedMovement max="0"/>
+					</effects>
+				</modifier>
+			</modifiers>
+		</dimensionalCorridor>
+		<ichorBlood cooldown="3"
+				name="Necrons/TesseractLabyrinth+"
+				icon="Actions/Necrons/TesseractLabyrinth+"
+				consumedActionPoints="0" 
+				consumedMovement="0"
+				requiredActionPoints="0">
+			<model>
+				<action sound="Actions/GateOfInfinity"/>
+			</model>
+			<beginTargets>
+				<target rangeMax="1">
+					<conditions>
+						<tile>
+							<land/>
+							<noUnit/>
+							<noFeature name="GravityWaves"/>
+						</tile>
+					</conditions>
+					<areas>
+						<area affects="Tile">
+							<modifiers>
+								<modifier visible="0">
+									<randomEffects count="1">
+										<addUnit name="AdeptusMechanicus/ArchaeopterStratoraptor" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="AdeptusMechanicus/FulguriteElectroPriest" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="AdeptusMechanicus/IronstriderBallistarius" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="AdeptusMechanicus/KataphronBreacher" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="AdeptusMechanicus/KataphronDestroyer" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="AdeptusMechanicus/KnightCrusader" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="AdeptusMechanicus/OnagerDunecrawler" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="AdeptusMechanicus/PteraxiiSterylizor" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="AdeptusMechanicus/SerberysSulphurhound" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="AdeptusMechanicus/SicarianInfiltrator" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="AdeptusMechanicus/SicarianRuststalker" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="AdeptusMechanicus/SkitariiMarshal" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="AdeptusMechanicus/SkitariiRanger" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="AdeptusMechanicus/SkitariiVanguard" consumedAction="0" consumedMovement="0"/>															<addUnit name="AdeptusMechanicus/SkorpiusDisintegrator" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="AdeptusMechanicus/SydonianDragoon" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="AdeptusMechanicus/TechPriestDominus" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="AdeptusMechanicus/TechPriestManipulus" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="AstraMilitarum/AttilanRoughRider" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="AstraMilitarum/Baneblade" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="AstraMilitarum/Basilisk" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="AstraMilitarum/Bullgryn" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="AstraMilitarum/DevilDog" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="AstraMilitarum/FieldOrdnanceBattery" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="AstraMilitarum/Guardsman" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="AstraMilitarum/HeavyWeaponsSquad" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="AstraMilitarum/Hydra" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="AstraMilitarum/LemanRussBattleTank" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="AstraMilitarum/LordCommissar" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="AstraMilitarum/MarauderBomber" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="AstraMilitarum/PrimarisPsyker" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="AstraMilitarum/Ratling" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="AstraMilitarum/RogalDornBattleTank" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="AstraMilitarum/ScoutSentinel" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="AstraMilitarum/TankCommander" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="AstraMilitarum/TempestusScion" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="AstraMilitarum/Thunderbolt" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="AstraMilitarum/VoidShieldGenerator" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="AstraMilitarum/WyrdvanePsyker" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="ChaosSpaceMarines/ChaosLord" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="ChaosSpaceMarines/ChaosSpaceMarine" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="ChaosSpaceMarines/ChaosSpawn" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="ChaosSpaceMarines/ChaosTerminator" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="ChaosSpaceMarines/DarkDisciple" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="ChaosSpaceMarines/Defiler" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="ChaosSpaceMarines/Forgefiend" consumedAction="0" consumedMovement="0"/>
+										<addUnit name="ChaosSpaceMarines/GreaterBrassScorpionOfKhorne" consumedAction="0" consumedMovement="0"/>							        					<addUnit name="ChaosSpaceMarines/Havoc" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="ChaosSpaceMarines/Helbrute" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="ChaosSpaceMarines/Heldrake" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="ChaosSpaceMarines/KhorneBerzerker" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="ChaosSpaceMarines/MasterOfPossession" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="ChaosSpaceMarines/Maulerfiend" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="ChaosSpaceMarines/NoctilithCrown" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="ChaosSpaceMarines/Obliterator" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="ChaosSpaceMarines/RubricMarine" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="ChaosSpaceMarines/Venomcrawler" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="ChaosSpaceMarines/Warpsmith" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="ChaosSpaceMarines/WarpTalon" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Drukhari/Archon" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Drukhari/Cronos" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Drukhari/Haemonculus" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Drukhari/Hellion" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Drukhari/Incubi" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Drukhari/KabaliteTrueborn" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Drukhari/KabaliteWarrior" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Drukhari/Mandrake" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Drukhari/Ravager" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Drukhari/RazorwingJetfighter" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Drukhari/Reaver" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Drukhari/Succubus" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Drukhari/Talos" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Drukhari/VoidravenBomber" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Drukhari/Wrack" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Drukhari/Wyche" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Eldar/Autarch" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Eldar/AvatarOfKhaine" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Eldar/CrimsonHunter" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Eldar/DarkReaper" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Eldar/FarseerSkyrunner" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Eldar/FireDragon" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Eldar/FirePrism" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Eldar/Guardian" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Eldar/HemlockWraithfighter" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Eldar/Hornet" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Eldar/HowlingBanshee" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Eldar/Ranger" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Eldar/Scorpion" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Eldar/ShiningSpear" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Eldar/Spiritseer" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Eldar/VaulsWrathSupportBattery" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Eldar/Vyper" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Eldar/Warlock" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Eldar/WarWalker" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Eldar/Wraithblade" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Eldar/Wraithknight" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Eldar/Wraithlord" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Neutral/Ambull" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Neutral/CatachanDevil" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Neutral/KastelanRobot" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Neutral/KrootHound" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Neutral/NeophyteHybrid" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Neutral/Poxwalker" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Neutral/Umbra" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Neutral/VespidStingwing" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Neutral/Poxwalker" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Orks/BigMek" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Orks/Boy" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Orks/BurnaBommer" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Orks/BurnaBoy" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Orks/Dakkajet" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Orks/DeffDread" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Orks/Deffkopta" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Orks/FlashGitz" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Orks/KillaKan" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Orks/KillBursta" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Orks/Meganob" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Orks/MegatrakkScrapjet" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Orks/MekGun" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Orks/Painboy" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Orks/SquighogBoy" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Orks/Tankbusta" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Orks/Warbiker" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Orks/Warboss" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Orks/Warbuggy" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Orks/Weirdboy" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="SistersOfBattle/ArcoFlagellant" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="SistersOfBattle/AvengerStrikeFighter" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="SistersOfBattle/BattleSister" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="SistersOfBattle/Canoness" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="SistersOfBattle/Castigator" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="SistersOfBattle/CerastusKnightLancer" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="SistersOfBattle/CelestianSacresant" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="SistersOfBattle/Dialogus" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="SistersOfBattle/Dominion" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="SistersOfBattle/Exorcist" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="SistersOfBattle/Imagifier" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="SistersOfBattle/LightningFighter" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="SistersOfBattle/Mortifier" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="SistersOfBattle/ParagonWarsuit" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="SistersOfBattle/Retributor" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="SistersOfBattle/SisterRepentia" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="SistersOfBattle/Zephyrim" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="SpaceMarines/Apothecary" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="SpaceMarines/AssaultSpaceMarine" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="SpaceMarines/AssaultTerminator" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="SpaceMarines/Captain" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="SpaceMarines/Chaplain" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="SpaceMarines/DevastatorCenturion" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="SpaceMarines/DevastatorSpaceMarine" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="SpaceMarines/Dreadnought" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="SpaceMarines/Hunter" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="SpaceMarines/LandSpeeder" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="SpaceMarines/Librarian" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="SpaceMarines/Predator" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="SpaceMarines/PrimarisAggressor" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="SpaceMarines/PrimarisHellblaster" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="SpaceMarines/PrimarisInceptor" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="SpaceMarines/PrimarisIntercessor" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="SpaceMarines/PrimarisInvaderATV" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="SpaceMarines/RedemptorDreadnought" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="SpaceMarines/Scout" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="SpaceMarines/ScoutBiker" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="SpaceMarines/StormSpeederThunderstrike" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="SpaceMarines/StormtalonGunship" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="SpaceMarines/TacticalSpaceMarine" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="SpaceMarines/Terminator" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="SpaceMarines/ThunderfireCannon" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="SpaceMarines/Vindicator" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="SpaceMarines/Whirlwind" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Tau/CadreFireblade" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Tau/Commander" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Tau/CrisisBattlesuit" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Tau/Ethereal" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Tau/FireWarrior" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Tau/FireWarriorBreacher" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Tau/HammerheadGunship" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Tau/KrootoxRider" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Tau/Pathfinder" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Tau/Piranha" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Tau/RazorsharkStrikeFighter" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Tau/RiptideBattlesuit" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Tau/RVarnaBattlesuit" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Tau/SkyRayGunship" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Tau/StealthBattlesuit" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Tau/Stormsurge" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Tau/SunSharkBomber" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Tau/TigerShark" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Tyranids/Biovore" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Tyranids/Carnifex" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Tyranids/Exocrine" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Tyranids/Gargoyle" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Tyranids/Haruspex" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Tyranids/HiveCrone" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Tyranids/HiveGuard" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Tyranids/HiveTyrant" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Tyranids/Hormagaunt" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Tyranids/Lictor" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Tyranids/Maleceptor" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Tyranids/NornEmissary" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Tyranids/Ravener" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Tyranids/ScythedHierodule" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Tyranids/Termagant" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Tyranids/Tervigon" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Tyranids/Trygon" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Tyranids/TyranidPrime" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Tyranids/Tyrannofex" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Tyranids/Venomthrope" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Tyranids/Warrior" consumedAction="0" consumedMovement="0"/>
+				        					<addUnit name="Tyranids/Zoanthrope" consumedAction="0" consumedMovement="0"/>
+									</randomEffects>
+								</modifier>
+							</modifiers>
+						</area>
+						<area affects="Unit">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addTrait duration="3" name="Summon"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</target>
+			</beginTargets>
+		</ichorBlood>
+		<ironWill beginOnDisappear="1"
+				cooldown="5"
+				passive="1"
+				name="Necrons/SurrogateHosts"
+				icon="Actions/Necrons/SurrogateHosts">
+			<model>
+				<action sound="Actions/MysticBuff"
+						soundDelay="0.5"/>
+			</model>
+			<beginTargets>
+				<selfTarget>
+					<areas>
+						<area affects="Unit">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addTrait name="IronWill"/>
+									</effects>
+								</modifier>
+							</modifiers>
+							<modifiers>
+								<modifier>
+									<conditions>
+										<unit>
+											<destroyed/>
+										</unit>
+									</conditions>
+									<effects>
+										<hitpointsFactorFromMax add="1.0"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+			</beginTargets>
+		</ironWill>
+		<genericUnitAbility name="Necrons/Musée1"
+				icon="Actions/Necrons/Musée1"
+				cooldown="3">
+			<model>
+				<action sound="Actions/GateOfInfinity"/>
+			</model>
+			<modifiers>
+				<modifier visible="0">
+					<conditions>
+						<unit>
+							<trait name="Necrons/Musée"/>
+						</unit>
+					</conditions>
+					<effects>
+						<cooldown add="-1"/>
+					</effects>
+				</modifier>
+			</modifiers>
+			<beginTargets>
+				<target rangeMax="1">
+					<conditions>
+						<unit>
+							<enemy/>
+							<noTrait name="Fortification"/>
+							<noTrait name="Vehicle"/>
+							<noTrait name="Hero"/>
+							<noTrait name="MonstrousCreature"/>
+							<noType name="Neutral/Psychneuein"/>
+							<hitpointsFraction less="0.33"/>
+						</unit>
+					</conditions>
+					<areas>
+						<area affects="Unit">
+							<modifiers>
+								<modifier>
+									<effects>
+										<removeUnit/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</target>
+				<selfTarget>
+					<areas>
+						<area affects="Unit">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addTrait duration="1" name="Necrons/Musée1"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+			</beginTargets>
+			<sharedCooldowns>
+				<action name="Necrons/Musée2"/>
+				<action name="Necrons/Musée3"/>
+			</sharedCooldowns>
+		</genericUnitAbility>
+		<genericUnitAbility name="Necrons/Musée2"
+				icon="Actions/Necrons/Musée2"
+				cooldown="3">
+			<model>
+				<action sound="Actions/GateOfInfinity"/>
+			</model>
+			<modifiers>
+				<modifier visible="0">
+					<conditions>
+						<unit>
+							<trait name="Necrons/Musée"/>
+						</unit>
+					</conditions>
+					<effects>
+						<cooldown add="-1"/>
+					</effects>
+				</modifier>
+			</modifiers>
+			<beginTargets>
+				<target rangeMax="1">
+					<conditions>
+						<unit>
+							<enemy/>
+							<hitpointsFraction less="0.33"/>
+						</unit>
+						<unit match="Any">
+							<trait name="Vehicle"/>
+							<trait name="MonstrousCreature"/>
+						</unit>
+					</conditions>
+					<areas>
+						<area affects="Unit">
+							<modifiers>
+								<modifier>
+									<effects>
+										<removeUnit/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</target>
+				<selfTarget>
+					<areas>
+						<area affects="Unit">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addTrait duration="1" name="Necrons/Musée2"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+			</beginTargets>
+			<sharedCooldowns>
+				<action name="Necrons/Musée1"/>
+				<action name="Necrons/Musée3"/>
+			</sharedCooldowns>
+		</genericUnitAbility>
+		<genericUnitAbility name="Necrons/Musée3"
+				icon="Actions/Necrons/Musée3"
+				cooldown="3">
+			<model>
+				<action sound="Actions/GateOfInfinity"/>
+			</model>
+			<modifiers>
+				<modifier visible="0">
+					<conditions>
+						<unit>
+							<trait name="Necrons/Musée"/>
+						</unit>
+					</conditions>
+					<effects>
+						<cooldown add="-1"/>
+					</effects>
+				</modifier>
+			</modifiers>
+			<beginTargets>
+				<target rangeMax="1">
+					<conditions>
+						<unit>
+							<enemy/>
+							<hitpointsFraction less="0.33"/>
+						</unit>
+						<unit match="Any">
+							<trait name="Hero"/>
+						</unit>
+					</conditions>
+					<areas>
+						<area affects="Unit">
+							<modifiers>
+								<modifier>
+									<effects>
+										<removeUnit/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</target>
+				<selfTarget>
+					<areas>
+						<area affects="Unit">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addTrait duration="1" name="Necrons/Musée3"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+			</beginTargets>
+			<sharedCooldowns>
+				<action name="Necrons/Musée1"/>
+				<action name="Necrons/Musée2"/>
+			</sharedCooldowns>
+		</genericUnitAbility>
+		<mindshackleScarabs cooldownMin="6" cooldownMax="3"
+				name="Necrons/Contrôlemental"
+				icon="Actions/Necrons/MindshackleScarabs"
+				levelUpPriority="0.15"
+				rank="-1"
+				rankMax="2"
+				consumedMovement="0">
+			<model>
+				<action animation="Units/Necrons/LordAbility"
+						sound="Actions/MindWar"/>
+			</model>
+			<beginTargets>
+				<target rangeMax="1">
+					<conditions>
+						<unit>
+							<enemy/>
+							<noTrait name="Vehicle"/>
+							<noTrait name="Hero"/>
+							<noTrait name="Fortification"/>
+							<noTrait name="Gargantuan"/>
+							<noType name="Neutral/Psychneuein"/>
+						</unit>
+					</conditions>
+					<areas>
+						<area affects="Unit">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addTrait duration="2" name="Enslaved" removeOnSourceDeath="1"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</target>
+			</beginTargets>
+		</mindshackleScarabs>
+		<healingTears name="Necrons/Monexperience"
+				icon="Actions/Necrons/Monexperience"
+				cooldown="3"
+				levelUpPriority="0.15"
+				rank="-1"
+				rankMax="2">
+			<model>
+				<action animation="Units/Necrons/LordAbility"
+						sound="Actions/Proselytise"/> 
+			</model>
+			<beginTargets>
+				<selfTarget>
+					<areas>
+						<area affects="Unit" excludeRadius="0" radius="1">
+							<modifiers>
+								<modifier>
+									<conditions>
+										<unit>
+											<allied/>
+										</unit>
+									</conditions>
+									<effects>
+										<level addMin="0.3" addMax="0.9"/>
+										<morale addMin="-2" addMax="-4"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</target>
+			</beginTargets>
+		</healingTears>
+		<resurrectionOrb name="Necrons/EmpathicObliterator"
+				icon="Actions/Necrons/EmpathicObliterator"
+				levelUpPriority="0.1"
+				cooldown="3" 
+				rank="-1"
+				rankMax="2">
+			<model>
+				<action animation="Units/Necrons/LordAttack"
+						beginFire="0.6"
+						endFire="2.0"
+						sound="Weapons/StaffOfLight0"/> 
+			</model>
+			<beginTargets>
+				<target rangeMax="1">
+					<conditions>
+						<unit>
+							<enemy/>
+						</unit>
+					</conditions>
+					<areas>
+						<area affects="Unit">
+							<modifiers>
+								<modifier>
+									<conditions>
+										<unit>
+											<enemy/>
+										</unit>
+									</conditions>
+									<effects>
+										<weaponDamage weapon="EmpathicObliterator"/>
+										<addTrait duration="1" name="Stunned"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</target>
+				<target>
+					<areas>
+						<area affects="Unit" excludeRadius="0" radius="1">
+							<modifiers>
+								<modifier>
+									<conditions>
+										<unit>
+											<enemy/>
+										</unit>
+									</conditions>
+									<effects>
+										<addTrait durationMin="1" durationMax="3" name="Necrons/EmpathicObliterator"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</target>
+			</beginTargets>
+		</resurrectionOrb>
+		<genericUnitAbility passive="1"
+				elite="1"
+				levelUpPriority="1"
+				name="Necrons/Musée"
+				icon="Actions/Necrons/Collection"
+				rank="-1"
+				rankMax="0">
+			<beginTargets>
+				<selfTarget>
+					<areas>
+						<area affects="Unit">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addTrait name="Necrons/Musée"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</target>
+			</beginTargets>
+		</genericUnitAbility>
+		<levelUp/>
+		<shop/>
+	</actions>
+	<traits>
+		<trait name="Necrons/AttackCityBonus" requiredUpgrade="Necrons/AttackCityBonus"/>
+		<trait name="ExtraInfantryArmour" requiredUpgrade="Necrons/ExtraInfantryArmour"/>
+		<trait name="Hero"/>
+		<trait name="Unique"/>
+		<trait name="Necrons/ReanimationProtocols"/>
+		<trait name="Necrons/Collector"/>
+		<trait name="Necrons/Infini"/>
+	</traits>
+</unit>

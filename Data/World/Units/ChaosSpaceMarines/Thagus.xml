@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="utf-8"?>
+<unit>
+	<model>
+		<unit mesh="Units/SpaceMarines/Terminator"
+				material="Units/ChaosSpaceMarines/Thagus"
+				idleAnimation="Units/SpaceMarines/TerminatorIdle"
+				idleAnimationCount="3"
+				idleContinuously="1"
+				normalWeight="0.1"
+				scale="1.0 1.0 1.0"
+				bloodBone="Chest"
+				walker="1"/>
+	</model>
+	<weapons>
+		<weapon name="Plaguespewer">
+			<model>
+				<projectileWeapon mesh="Weapons/SpaceMarines/Bolter"
+						material="Units/ChaosSpaceMarines/PlagueBolter"
+						bone="RightHand"
+						muzzleBone="Muzzle0"
+						fireInterval="0.2"
+						scale="1.5 2.0 1.5"/>
+				<!-- Storm Bolters need two muzzles. -->
+			</model>
+		</weapon>
+		<weapon name="BlightLauncher" slotName="BlightLauncher" enabled="0">
+			<model>
+				<projectileWeapon mesh="Weapons/SpaceMarines/StormBolter"
+						material="Units/ChaosSpaceMarines/Thagus"
+						bone="LeftHand"
+						muzzleBone="Muzzle0"
+						fireInterval="0.7"/>
+			</model>
+		</weapon>
+		<weapon name="PowerFist">
+			<model>
+				<weapon fireInterval="3.0"/>
+			</model>
+		</weapon>
+	</weapons>
+	<modifiers>
+		<modifier visible="0">
+			<effects>
+				<armor base="10"/> <!-- %armor base armor=2+ -->
+				<hitpointsMax base="10.0"/> <!-- %hitpointsMax base toughness=4 wounds=1 -->
+				<meleeAccuracy base="10"/> <!-- %meleeAccuracy base weaponSkill=4 -->
+				<meleeAttacks base="2"/>
+				<rangedAttacks base="2"/>
+				<strengthDamage base="1.5"/> <!-- %strengthDamage base strength=4 -->
+				<!-- <meleeInitiative base="4"/> -->
+				<moraleMax base="18"/> <!-- %moraleMax base leadership=8 -->
+				<movementMax base="3"/>
+				<productionCost base="48.0"/> <!-- %productionCost base tier=8 factor=1 -->
+				<rangedAccuracy base="10"/> <!-- %rangedAccuracy base ballisticSkill=4 -->
+				<foodUpkeep base="6.0"/> <!-- %requisitionsUpkeep base tier=8 factor=1 -->
+				<oreCost base="200.0"/> <!-- %requisitionsCost base tier=8 factor=1 -->
+				<influenceUpkeep base="8"/> <!-- %influenceUpkeep base tier=5 factor=1 -->
+				<influenceCost base="200.0"/> <!-- %influenceCost base tier=6 factor=2 -->
+				<itemSlots base="6"/>
+				<levelMax base="9"/>
+			</effects>
+		</modifier>
+	</modifiers>
+	<strategyModifiers>
+		<modifier>
+			<effects>
+				<increaseHeroesScore base="1.0"/>
+			</effects>
+		</modifier>
+	</strategyModifiers>
+	<actions>
+		<attack>
+			<model>
+				<action animation="Units/SpaceMarines/TerminatorAttack"
+						beginFire="0.767"
+						endFire="2.5"
+						chargeAnimation="Units/SpaceMarines/TerminatorCharge"
+						chargeBeginFire="0.333"
+						chargeEndFire="1.433"						
+						chargeDefenseAnimation="Units/SpaceMarines/TerminatorChargeDefense"
+						chargeDefenseBeginFire="0.333"
+						chargeDefenseEndFire="1.233"						
+						meleeAnimation="Units/SpaceMarines/TerminatorMelee"
+						meleeBeginSwing="0.4"
+						meleeEndSwing="0.7"
+						meleeDefenseAnimation="Units/SpaceMarines/TerminatorMeleeDefense"
+						meleeDefenseBeginSwing="0.4"
+						meleeDefenseEndSwing="0.7"/>
+			</model>				
+		</attack>
+		<die>
+			<model>
+				<action animation="Units/SpaceMarines/TerminatorDie"
+						animationCount="2"
+						sound="Units/MediumArmoredDie"
+						soundCount="4"
+						soundDelay="0.6"
+						voiceSound="Units/SpaceMarines/InfantryDie"
+						voiceSoundCount="5"/>
+			</model>
+		</die>
+		<idle>
+			<model>
+				<action/>
+			</model>
+		</idle>
+		<move>
+			<model>
+				<action animation="Units/SpaceMarines/TerminatorMove"
+						sound="Units/SpaceMarines/TerminatorMove"
+						soundCount="1"/>
+			</model>
+		</move>
+		<incursion cooldown="4"
+				name="ChaosSpaceMarines/PlagueMarine"
+				icon="Units/ChaosSpaceMarines/PlagueMarine">
+			<model>
+				<action animation="Units/SpaceMarines/TerminatorAttack"
+						beginFire="0.767"
+						endFire="2.5"
+						sound="Actions/PsychicBuff"/>
+			</model>
+			<modifiers>
+				<modifier visible="0">
+					<conditions>
+						<unit>
+							<trait name="ChaosSpaceMarines/LordofHosts"/>
+						</unit>
+					</conditions>
+					<effects>
+						<cooldown add="-2"/>
+					</effects>
+				</modifier>
+				<modifier>
+					<effects>
+						<oreCost base="20"/>
+						<foodCost base="20"/>
+						<influenceCost base="30"/>
+					</effects>
+				</modifier>
+			</modifiers>
+			<beginTargets>
+				<target rangeMax="1">
+					<conditions>
+						<tile>
+							<land/>
+							<noUnit/>
+							<noFeature name="GravityWaves"/>
+						</tile>
+					</conditions>
+					<areas>
+						<area affects="Tile">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addUnit name="ChaosSpaceMarines/PlagueMarine" consumedAction="0" consumedMovement="0"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+			</beginTargets>
+		</incursion>
+		<incursion cooldown="6"
+				name="ChaosSpaceMarines/BlightLordReaper"
+				icon="Units/ChaosSpaceMarines/BlightLordReaper"
+				requiredUpgrade="ChaosSpaceMarines/ChaosRising">
+			<model>
+				<action animation="Units/SpaceMarines/TerminatorAttack"
+						beginFire="0.767"
+						endFire="2.5"
+						sound="Actions/PsychicBuff"/>
+			</model>
+			<modifiers>
+				<modifier visible="0">
+					<conditions>
+						<unit>
+							<trait name="ChaosSpaceMarines/LordofHosts"/>
+						</unit>
+					</conditions>
+					<effects>
+						<cooldown add="-15"/>
+					</effects>
+				</modifier>
+				<modifier>
+					<effects>
+						<oreCost base="80"/>
+						<foodCost base="80"/>
+						<influenceCost base="60"/>
+					</effects>
+				</modifier>
+			</modifiers>
+			<beginTargets>
+				<target rangeMax="1">
+					<conditions>
+						<tile>
+							<land/>
+							<noUnit/>
+							<noFeature name="GravityWaves"/>
+						</tile>
+					</conditions>
+					<areas>
+						<area affects="Tile">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addUnit name="ChaosSpaceMarines/BlightLordReaper" consumedAction="0" consumedMovement="0"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+			</beginTargets>
+			<sharedCooldowns>
+				<action name="ChaosSpaceMarines/BlightLordPlague"/>
+			</sharedCooldowns>
+		</incursion>
+		<incursion cooldown="6"
+				name="ChaosSpaceMarines/BlightLordPlague"
+				icon="Units/ChaosSpaceMarines/BlightLordPlague"
+				requiredUpgrade="ChaosSpaceMarines/ChaosRising">
+			<model>
+				<action animation="Units/SpaceMarines/TerminatorAttack"
+						beginFire="0.767"
+						endFire="2.5"
+						sound="Actions/PsychicBuff"/>
+			</model>
+			<modifiers>
+				<modifier visible="0">
+					<conditions>
+						<unit>
+							<trait name="ChaosSpaceMarines/LordofHosts"/>
+						</unit>
+					</conditions>
+					<effects>
+						<cooldown add="-15"/>
+					</effects>
+				</modifier>
+				<modifier>
+					<effects>
+						<oreCost base="80"/>
+						<foodCost base="80"/>
+						<influenceCost base="60"/>
+					</effects>
+				</modifier>
+			</modifiers>
+			<beginTargets>
+				<target rangeMax="1">
+					<conditions>
+						<tile>
+							<land/>
+							<noUnit/>
+							<noFeature name="GravityWaves"/>
+						</tile>
+					</conditions>
+					<areas>
+						<area affects="Tile">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addUnit name="ChaosSpaceMarines/BlightLordPlague" consumedAction="0" consumedMovement="0"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+			</beginTargets>
+			<sharedCooldowns>
+				<action name="ChaosSpaceMarines/BlightLordReaper"/>
+			</sharedCooldowns>
+		</incursion>
+		<genericUnitAbility name="ChaosSpaceMarines/ToxineZone"
+					icon="Actions/ChaosSpaceMarines/Toxine"
+				passive="1">
+			<beginTargets>
+				<selfTarget>
+					<areas>
+						<area affects="Tile" excludeRadius="0" radius="1">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addTrait name="ChaosSpaceMarines/ToxineZone"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+			</beginTargets>
+		</genericUnitAbility>
+		<genericUnitAbility name="ChaosSpaceMarines/ZoneToxique"
+				cooldown="6"
+				icon="Actions/ChaosSpaceMarines/ToxineZone"
+				consumedActionPoints="0"
+				requiredActionPoints="0"				
+				rank="-1"
+				rankMax="2">
+			<model>
+				<action sound="Weapons/ToxicMiasma1"/>
+			</model>
+			<beginTargets>
+				<selfTarget>
+					<areas>
+						<area affects="Tile" radius="1">
+							<modifiers>
+								<modifier>
+									<conditions>
+										<tile>
+											<land/>
+										</tile>
+									</conditions>
+									<effects>
+										<addFeature name="PoisonX" duration="6"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+			</beginTargets>
+		</genericUnitAbility>
+		<useWeapon cooldown="3"
+				levelUpPriority="0.1"
+				rank="-1"
+				rankMax="2"
+				weaponSlotName="BlightLauncher">
+			<model>
+				<action animation="Units/SpaceMarines/TerminatorAttack"
+						beginFire="0.767"
+						endFire="2.5"/>
+			</model>
+			<modifiers>
+				<modifier>
+					<effects>
+						<attacks addMin="0" addMax="4"/>
+						<rangeMax addMin="0" addMax="2"/>
+					</effects>
+				</modifier>
+			</modifiers>			
+			<beginTargets>
+				<target rangeMax="2">
+					<conditions>
+						<unit>
+							<enemy/>
+						</unit>
+					</conditions>
+				</target>
+			</beginTargets>
+		</useWeapon>
+		<genericUnitAbility name="ChaosSpaceMarines/Sickly"
+				passive="1"
+				icon="Actions/ChaosSpaceMarines/Sickly"				
+				rank="-1"
+				rankMax="2">
+			<beginTargets>
+				<selfTarget>
+					<areas>
+						<area affects="Tile" excludeRadius="0" radiusMin="1" radiusMin="3">
+							<modifiers>
+								<modifier>
+									<conditions>
+										<unit>
+											<trait name="ChaosSpaceMarines/DeathGuard"/>
+										</unit>
+									</conditions>
+									<effects>
+										<addTrait name="ChaosSpaceMarines/Sickly"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+						<area affects="Unit">
+							<modifiers>
+								<modifier visible="0">
+									<effects>
+										<addTrait name="ChaosSpaceMarines/Sickly"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+			</beginTargets>
+		</genericUnitAbility>
+		<genericUnitAbility name="ChaosSpaceMarines/LordofHosts"
+				elite="1"
+				passive="1"
+				levelUpPriority="1"
+				name="ChaosSpaceMarines/LordofHosts"
+				rank="-1"
+				rankMax="0">
+			<beginTargets>
+				<selfTarget>
+					<areas>
+						<area affects="Unit">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addTrait name="ChaosSpaceMarines/LordofHosts"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+			</beginTargets>
+		</genericUnitAbility>
+		<levelUp/>
+		<shop/>
+	</actions>
+	<traits>
+		<trait name="Fearless"/>
+		<trait name="Bulky"/>
+		<trait name="ExtraInfantryArmour" requiredUpgrade="ChaosSpaceMarines/ExtraInfantryArmour"/>
+		<trait name="TerminatorArmour"/>
+		<trait name="Relentless"/>
+		<trait name="Hero"/>
+		<trait name="Psyker"/>
+		<trait name="Unique"/>
+		<trait name="ChaosSpaceMarines/MarkOfNurgle"/>
+		<trait name="ChaosSpaceMarines/DeathGuardElite"/>
+		<trait name="ChaosSpaceMarines/ChampionOfChaos"/>
+		<trait name="ChaosSpaceMarines/ChampionOfNurgle"/>
+		<trait name="ChaosSpaceMarines/GiftOfMutation" requiredUpgrade="ChaosSpaceMarines/GiftOfMutation"/>
+		<trait name="Poisoned" rank="4"/>
+	</traits>
+</unit>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trait category="Buff" icon="Actions/ChaosSpaceMarines/Warmaster">
+	<modifiers>
+		<modifier>
+			<conditions>
+				<unit>
+					<allied/>
+					<faction name="ChaosSpaceMarines"/>
+				</unit>
+			</conditions>
+			<effects>
+				<invulnerableDamageReduction add="0.05"/>
+				<accuracy add="1"/>
+				<armorPenetration add="1"/>
+			</effects>
+		</modifier>
+	</modifiers>
+</trait>

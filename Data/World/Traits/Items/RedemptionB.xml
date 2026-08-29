@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trait visible="0" stacking="1">
+	<modifiers>
+		<modifier>
+			<effects>
+				<rangedArmorPenetration add="0.2"/>
+			</effects>
+		</modifier>
+	</modifiers>
+</trait>
+	

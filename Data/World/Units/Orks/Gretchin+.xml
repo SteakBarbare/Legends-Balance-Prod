@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="utf-8"?>
+<unit>
+	<model>
+		<unit mesh="Units/Orks/Gretchin+"
+				material="Units/Orks/Gretchin+"
+				idleAnimation="Units/AdeptusMechanicus/SkitariiMarshalIdle"
+				idleAnimationCount="3"
+				idleContinuously="1"
+				normalWeight="0.1"
+				scale="0.66 0.66 0.66"
+				bloodBone="Chest"
+				walker="1"/>
+	</model>
+	<group size="14" rowSize="5" memberDeltaX="50" memberDeltaY="50"/>
+	<weapons>
+		<weapon name="GretchinPistol+">
+			<model>
+				<projectileWeapon muzzleBone="GunMuzzle" fireInterval="0.4"/>
+			</model>
+		</weapon>
+		<weapon name="CloseCombatWeapon">
+			<model>
+				<weapon fireInterval="10.0"/>
+			</model>
+		</weapon>
+	</weapons>
+	<modifiers>
+		<modifier visible="0">
+			<effects>
+				<armor base="0"/> <!-- %armor base armor=4+ -->
+				<foodCost base="7.5"/> <!-- %foodCost base tier=6 factor=0.5 -->
+				<foodUpkeep base="0.75"/> <!-- %foodUpkeep base tier=6 factor=1 -->
+				<hitpointsMax base="1.0"/> <!-- %hitpointsMax base toughness=3 wounds=3 -->
+				<influenceUpkeep base="0.75"/> <!-- %influenceUpkeep base tier=6 factor=2 -->
+				<meleeAttacks base="1"/>
+				<strengthDamage base="0.5"/> <!-- %strengthDamage base strength=3 -->
+				<moraleMax base="4"/> <!-- %moraleMax base leadership=9 -->
+				<movementMax base="4"/>
+				<productionCost base="24.0"/> <!-- %productionCost base tier=6 factor=1 -->
+				<meleeAccuracy base="6"/> <!-- %rangedAccuracy base ballisticSkill=5 -->
+				<rangedAccuracy base="6"/> <!-- %rangedAccuracy base ballisticSkill=5 -->
+			</effects>
+		</modifier>
+	</modifiers>
+	<strategyModifiers>
+		<modifier>
+			<effects>
+				<increaseInfantryScore base="1.0"/>
+			</effects>
+		</modifier>
+	</strategyModifiers>
+	<actions>
+		<attack>
+			<model>
+				<action animation="Units/AdeptusMechanicus/SkitariiMarshalAttack"
+						beginFire="1.1"
+						endFire="2.0"
+						chargeAnimation="Units/AdeptusMechanicus/SkitariiMarshalCharge"
+						chargeBeginFire="0.43"
+						chargeEndFire="1.0"
+						meleeAnimation="Units/AdeptusMechanicus/SkitariiMarshalMelee"
+						meleeBeginSwing="0.15"
+						meleeEndSwing="0.5"/>
+			</model>				
+		</attack>
+		<die>
+			<model>
+				<action animation="Units/AdeptusMechanicus/SkitariiMarshalDie0"
+						sound="Units/SmallUnarmoredDie"
+						soundCount="4"
+						soundDelay="0.5"
+						voiceSound="Units/Orks/Gretchin+Die"
+						voiceSoundCount="6"/>
+			</model>		
+		</die>
+		<idle>
+			<model>
+				<action animationSpeed="1.0"/>
+			</model>
+		</idle>
+		<move>
+			<model>
+				<action animation="Units/AdeptusMechanicus/SkitariiMarshalMove"
+						sound="Units/AstraMilitarum/InfantryMove"
+						soundCount="4"/>
+			</model>
+		</move>
+		<ereWeGo consumedActionPoints="0"
+				consumedMovement="0"
+				cooldown="5"
+				requiredActionPoints="0"
+				requiredMovement="1"
+				usableInTransport="1">
+			<model>
+				<action sound="Actions/OrksBuff"/>
+			</model>
+			<beginTargets>
+				<selfTarget>
+					<areas>
+						<area affects="Unit">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addTrait duration="1" name="EreWeGo"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+			</beginTargets>
+		</ereWeGo>
+		<ichorBlood name="Orks/GretchinShotgun+"
+				icon="Weapons/Blunderbuss+"
+				cooldown="1"
+				cooldownRemaining="3"
+				requiredUpgrade="Orks/Gretchin++">
+			<model>
+				<action sound="Actions/OrksBuff"/>
+			</model>
+			<conditions>
+				<unit>
+					<hitpointsFraction greater="0.75"/>
+				</unit>
+			</conditions>		
+			<beginTargets>
+				<selfTarget>
+					<areas>
+						<area affects="Unit">
+							<modifiers>
+								<modifier>
+									<effects>
+										<removeUnit/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+				<selfTarget>
+					<areas>
+						<area affects="Tile">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addUnit name="Orks/GretchinShotgun+"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+			</beginTargets>
+		</ichorBlood>
+		<ichorBlood name="Orks/GretchinSniper+"
+				icon="Weapons/GretchinSniper+"
+				cooldown="1"
+				cooldownRemaining="3"
+				requiredUpgrade="Orks/Gretchin++">
+			<model>
+				<action sound="Actions/OrksBuff"/>
+			</model>
+			<conditions>
+				<unit>
+					<hitpointsFraction greater="0.75"/>
+				</unit>
+			</conditions>		
+			<beginTargets>
+				<selfTarget>
+					<areas>
+						<area affects="Unit">
+							<modifiers>
+								<modifier>
+									<effects>
+										<removeUnit/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+				<selfTarget>
+					<areas>
+						<area affects="Tile">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addUnit name="Orks/GretchinSniper+"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+			</beginTargets>
+		</ichorBlood>
+		<ichorBlood name="Orks/GretchinDouble+"
+				icon="Weapons/GretchinPistol+"
+				cooldown="1"
+				cooldownRemaining="3"
+				requiredUpgrade="Orks/Gretchin++">
+			<model>
+				<action sound="Actions/OrksBuff"/>
+			</model>
+			<conditions>
+				<unit>
+					<hitpointsFraction greater="0.75"/>
+				</unit>
+			</conditions>		
+			<beginTargets>
+				<selfTarget>
+					<areas>
+						<area affects="Unit">
+							<modifiers>
+								<modifier>
+									<effects>
+										<removeUnit/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+				<selfTarget>
+					<areas>
+						<area affects="Tile">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addUnit name="Orks/GretchinDouble+"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+			</beginTargets>
+		</ichorBlood>
+		<scout cooldown="10"
+				name="Orks/GretchinOK+"
+				icon="Traits/Orks/GretchinOK+">
+			<model>
+				<action animation="Units/AdeptusMechanicus/SkitariiMarshalAbility"
+						sound="Actions/Construct"/>
+			</model>
+			<beginTargets>
+				<target rangeMax="1">
+					<conditions>
+						<unit>
+							<allied/>
+							<type name="Orks/Scrap+"/>
+						</unit>
+					</conditions>
+					<areas>
+						<area affects="Tile">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addTrait name="Orks/GretchinOK+"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</target>
+			</beginTargets>
+		</scout>
+		<blessingsOfTheOmnissiah cooldown="1"
+				name="Orks/GretchinRepair+"
+				icon="Traits/Orks/GretchinRepair+">
+			<model>
+				<action animation="Units/AdeptusMechanicus/SkitariiMarshalAbility"
+						sound="Actions/MechanicalBuff"/>
+			</model>
+			<beginTargets>
+				<target rangeMax="1">
+					<conditions>
+						<unit>
+							<allied/>
+							<damaged/>
+							<trait name="Fortification"/>
+						</unit>
+					</conditions>
+					<areas>
+						<area affects="Unit">
+							<modifiers>
+								<modifier>
+									<effects>
+										<hitpoints add="4"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</target>
+			</beginTargets>
+		</blessingsOfTheOmnissiah>
+		<scout cooldown="5"
+				name="Orks/Banner+"
+				icon="Units/Orks/Banner+">
+			<model>
+				<action animation="Units/AdeptusMechanicus/SkitariiMarshalAbility"
+						sound="Actions/Construct"/>
+			</model>
+			<modifiers>
+				<modifier visible="0">
+					<effects>
+						<oreCost base="90"/>
+						<energyCost base="90"/>
+						<influenceCost base="90"/>
+					</effects>
+				</modifier>
+			</modifiers>
+			<beginTargets>
+				<target rangeMax="1">
+					<conditions>
+						<tile>
+							<noUnit/>
+							<land/>
+							<feature name="ImperialRuin"/>
+							<noFeature name="GravityWaves"/>
+						</tile>
+					</conditions>
+					<areas>
+						<area affects="Tile">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addUnit name="Orks/Banner+"/>
+										<removeFeature name="ImperialRuin"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</target>
+			</beginTargets>
+		</scout>
+		<scout cooldown="5"
+				name="Orks/Generator+"
+				icon="Units/Orks/Generator+">
+			<model>
+				<action animation="Units/AdeptusMechanicus/SkitariiMarshalAbility"
+						sound="Actions/Construct"/>
+			</model>
+			<modifiers>
+				<modifier visible="0">
+					<effects>
+						<oreCost base="120"/>
+						<influenceCost base="120"/>
+					</effects>
+				</modifier>
+			</modifiers>
+			<beginTargets>
+				<target rangeMax="1">
+					<conditions>
+						<tile>
+							<noUnit/>
+							<land/>
+							<feature name="ImperialRuin"/>
+							<noFeature name="GravityWaves"/>
+						</tile>
+					</conditions>
+					<areas>
+						<area affects="Tile">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addUnit name="Orks/Generator+"/>
+										<removeFeature name="ImperialRuin"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</target>
+			</beginTargets>
+		</scout>
+		<scout cooldown="10"
+				name="Orks/BigGenerator+"
+				icon="Units/Orks/BigGenerator+"
+				requiredUpgrade="Orks/BigGenerator+">
+			<model>
+				<action animation="Units/AdeptusMechanicus/SkitariiMarshalAbility"
+						sound="Actions/Construct"/>
+			</model>
+			<modifiers>
+				<modifier visible="0">
+					<effects>
+						<oreCost base="240"/>
+						<influenceCost base="240"/>
+					</effects>
+				</modifier>
+			</modifiers>
+			<beginTargets>
+				<target rangeMax="1">
+					<conditions>
+						<tile>
+							<noUnit/>
+							<land/>
+							<feature name="ImperialRuin"/>
+							<noFeature name="GravityWaves"/>
+						</tile>
+					</conditions>
+					<areas>
+						<area affects="Tile">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addUnit name="Orks/BigGenerator+"/>
+										<removeFeature name="ImperialRuin"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</target>
+			</beginTargets>
+		</scout>
+		<scout cooldown="5"
+				name="Orks/Pile+"
+				icon="Units/Orks/Pile+"
+				requiredUpgrade="Orks/Pile+">
+			<model>
+				<action animation="Units/AdeptusMechanicus/SkitariiMarshalAbility"
+						sound="Actions/Construct"/>
+			</model>
+			<modifiers>
+				<modifier visible="0">
+					<effects>
+						<oreCost base="120"/>
+						<energyCost base="120"/>
+						<influenceCost base="120"/>
+					</effects>
+				</modifier>
+			</modifiers>
+			<beginTargets>
+				<target rangeMax="1">
+					<conditions>
+						<tile>
+							<noUnit/>
+							<land/>
+							<feature name="ImperialRuin"/>
+							<noFeature name="GravityWaves"/>
+						</tile>
+					</conditions>
+					<areas>
+						<area affects="Tile">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addUnit name="Orks/Pile+"/>
+										<removeFeature name="ImperialRuin"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</target>
+			</beginTargets>
+		</scout>
+		<scout cooldown="8"
+				name="Orks/Hutt+"
+				icon="Units/Orks/Hutt+"
+				requiredUpgrade="Orks/Hutt+">
+			<model>
+				<action animation="Units/AdeptusMechanicus/SkitariiMarshalAbility"
+						sound="Actions/Construct"/>
+			</model>
+			<modifiers>
+				<modifier visible="0">
+					<effects>
+						<oreCost base="180"/>
+						<energyCost base="180"/>
+						<influenceCost base="180"/>
+					</effects>
+				</modifier>
+			</modifiers>
+			<beginTargets>
+				<target rangeMax="1">
+					<conditions>
+						<tile>
+							<noUnit/>
+							<land/>
+							<feature name="ImperialRuin"/>
+							<noFeature name="GravityWaves"/>
+						</tile>
+					</conditions>
+					<areas>
+						<area affects="Tile">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addUnit name="Orks/Hutt+"/>
+										<removeFeature name="ImperialRuin"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</target>
+			</beginTargets>
+		</scout>
+	</actions>
+	<traits>
+		<trait name="Orks/GreenTideHealing"/>
+		<trait name="OrkoidFungusBonusHealingRate" requiredUpgrade="Orks/OrkoidFungusBonusHealingRate"/>
+		<trait name="Orks/Scavenger"/>
+		<trait name="MobRule"/>
+		<trait name="Orks/MightMakesRight"/>
+		<trait name="ExtraInfantryArmour" requiredUpgrade="Orks/ExtraInfantryArmour"/>
+		<trait name="Orks/CreateOrkoidFungusOnDeath"/>
+		<trait name="Orks/GretchinElusive+" requiredUpgrade="Orks/GretchinElusive+"/>
+	</traits>
+</unit>
