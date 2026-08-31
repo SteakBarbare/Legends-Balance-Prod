@@ -18,7 +18,7 @@ This is a mod for Gladius Relic of War made to balance the Legends mods without 
 - Reduced Ranged damage res for Medusan Immortals from 66% to 33%, they could tank even late game unit before
 - Reduced their weapon range 2 -> 1
 - Gordian heal aura range 3 -> 1, SM already have some of the best infantry in the game, and having a hero that can heal almost all your army by just exisiting was way too strong, now you will need to use ur brain to fink about positioning
-- Most building will now give requisition to the AI, it's not the prettiest fix but SM AI was struggling because it was spending all its money droping buildings
+- Most building will now give requisition to the AI, it's not the prettiest fix but SM AI was struggling because it was spending all its money droping buildings (the values are way too high but at least SM are a danger now)
 - Nothing to do with HoL, but I buffed the Whirlwhind since it was really weak af
 
 #### Kay-Ohss
