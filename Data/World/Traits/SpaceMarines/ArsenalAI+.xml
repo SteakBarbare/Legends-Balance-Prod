@@ -6,7 +6,7 @@
 				<player><aiControlled/></player>
 			</conditions>
 			<effects>
-				<requisitions add="30"/>
+				<requisitions add="15"/>
 			</effects>
 		</modifier>
 	</modifiers>
