@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trait alwaysVisible="1" category="Buff" icon="Actions/AstraMilitarum/MechanicalPackRat" rankMax="2">
+	<perTurnModifiers>
+		<modifier>
+			<effects>
+				<hitpointsFactorFromMax addMin="0.025" addMax="0.1"/>
+			</effects>
+		</modifier>
+	</perTurnModifiers>
+</trait>

@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="utf-8"?>
+<unit>
+	<model>
+		<unit mesh="Units/AstraMilitarum/Baneblade"
+				material="Units/AstraMilitarum/Bendikt"
+				idleAnimation="Units/AstraMilitarum/BanebladeIdle"
+				idleAnimationCount="3"
+				scale="1.3 1.3 1.3"
+				explosionsBone="Hull"
+				uvAnimated="1"/>
+	</model>
+	<weapons>
+ 		<weapon name="None" enabled="0">
+			<model>
+				<weapon bone="Hull"
+						mesh="Weapons/AstraMilitarum/BanebladeSideTurrets"
+						material="Units/AstraMilitarum/BendiktSideTurrets"/>
+			</model>
+		</weapon>
+		<weapon name="Autocannon">
+			<model>
+				<projectileWeapon muzzleBone=".AutoCannonMuzzle0"/>
+			</model>		
+		</weapon>
+		<weapon name="BanebladeCannon">
+			<model>
+				<projectileWeapon muzzleBone=".BanebladeCannonMuzzle0"
+						fireInterval="1.0"/>
+			</model>
+		</weapon>
+		<weapon name="DemolisherCannon" slotName="DemolisherCannon" enabled="0">
+			<model>
+				<projectileWeapon muzzleBone=".DemolisherCannonMuzzle0"
+						fireInterval="1.0"/>
+			</model>
+		</weapon>
+		<weapon name="TwinLinkedHeavyBolter">
+			<model>
+				<projectileWeapon muzzleBone=".HeavyBolterMuzzle"/>
+			</model>	
+		</weapon>
+		<weapon name="TwinLinkedHeavyBolter" count="2"
+				requiredUpgrade="AstraMilitarum/AdditionalHeavyBolters">
+			<model>
+				<projectileWeapon bone="Hull"
+						mesh="Weapons/AstraMilitarum/BanebladeTwinLinkedHeavyBolters"
+						material="Units/AstraMilitarum/Bendikt"
+						muzzleBone=".Muzzle"
+						muzzleCount="4"/>
+			</model>
+		</weapon>
+		<weapon name="Lascannon" slotName="Lascannon" count="2" enabled="0"
+				requiredUpgrade="AstraMilitarum/BanebladeLascannon">
+			<model>
+				<beamWeapon bone="Hull"
+						mesh="Weapons/AstraMilitarum/BanebladeLascannons"
+						material="Units/AstraMilitarum/BendiktLascannons"			
+						muzzleBone=".Muzzle"
+						muzzleCount="2"
+						fireInterval="1.0"
+						cycleMuzzles="0"/>
+			</model>			
+		</weapon>
+		<weapon name="HunterKillerMissile" slotName="HunterKillerMissile"
+				enabled="0">
+			<model>
+				<missileWeapon muzzleBone=".AutoCannonMuzzle0"
+						fireInterval="5.0"/>
+			</model>	
+		</weapon>
+	</weapons>
+	<modifiers>
+		<modifier visible="0">
+			<effects>
+				<armor base="9"/> <!-- %armor base armor=14/13/12 -->
+				<hitpointsMax base="150.0"/> <!-- %hitpointsMax base armor=14/13/12 wounds=9 -->
+				<oreUpkeep base="20.0"/> <!-- %oreUpkeep base tier=12 factor=1 -->
+				<oreCost base="320.0"/> <!-- %oreCost base tier=12 factor=1 -->
+				<moraleMax base="18"/> <!-- %moraleMax base leadership=8 -->
+				<movementMax base="3"/>
+				<productionCost base="72.0"/> <!-- %productionCost base tier=12 factor=1 -->
+				<rangedAccuracy base="8"/> <!-- %rangedAccuracy base ballisticSkill=3 -->
+				<influenceUpkeep base="20.0"/>
+				<influenceCost base="320.0"/>
+				<itemSlots base="3"/>
+				<levelMax base="9"/>
+			</effects>
+		</modifier>
+	</modifiers>
+	<strategyModifiers>
+		<modifier>
+			<effects>
+				<increaseHeroesScore base="1.0"/>
+			</effects>
+		</modifier>
+	</strategyModifiers>
+	<actions>
+		<attack>
+			<model>
+				<action	animation="Units/AstraMilitarum/BanebladeAttack"
+						beginFire="0.2"
+						endFire="2.7"/>
+			</model>
+		</attack>
+		<die>
+			<model>
+				<action animation="Units/AstraMilitarum/BanebladeDie"
+						sound="Units/LargeVehicleDie"
+						soundCount="3"
+						soundDelay="0.2"/>
+			</model>
+		</die>
+		<move>
+			<model>
+				<action	animation="Units/AstraMilitarum/BanebladeMove"
+						sound="Units/AstraMilitarum/SuperHeavyTankMove"
+						soundCount="3"/>
+			</model>
+		</move>
+		<auraOfFear passive="1">
+			<beginTargets>
+				<selfTarget>
+					<areas>
+						<area affects="Tile" excludeRadius="0" radius="1">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addTrait name="Fear"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+			</beginTargets>
+		</auraOfFear>
+		<useWeapon cooldown="1"
+				requiredActionPoints="0"
+				consumedActionPoints="0"
+				weaponSlotName="DemolisherCannon">
+			<model>
+				<action	animation="Units/AstraMilitarum/BanebladeAttack"
+						beginFire="0.2"
+						endFire="2.7"/>
+			</model>	
+		</useWeapon>
+		<useWeapon cooldown="1"
+				requiredActionPoints="0"
+				consumedActionPoints="0"
+				weaponSlotName="Lascannon"
+				requiredUpgrade="AstraMilitarum/BanebladeLascannon">
+			<model>
+				<action	animation="Units/AstraMilitarum/BanebladeAttack"
+						beginFire="0.2"
+						endFire="2.7"/>
+			</model>	
+		</useWeapon>
+		<createSmokeScreen icon="Traits/SmokeScreen"
+				cooldown="10"
+				requiredUpgrade="AstraMilitarum/SmokeLauncher">
+			<model>
+				<action sound="Actions/SmokeScreen"/>
+			</model>
+			<beginTargets>
+				<selfTarget>
+					<areas>
+						<area affects="Tile">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addFeature duration="3" name="SmokeScreen"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+			</beginTargets>
+		</createSmokeScreen>
+		<useWeapon weaponSlotName="HunterKillerMissile"
+				requiredActionPoints="0"
+				consumedActionPoints="0"
+				cooldown="10"
+				requiredUpgrade="AstraMilitarum/HunterKillerMissile">
+			<model>
+				<action beginFire="0.1" endFire="1.0"/>
+			</model>
+		</useWeapon>
+		<genericUnitAbility passive="1" 
+				name="AstraMilitarum/Commandement"
+				icon="Actions/AstraMilitarum/Commandement">
+			<beginTargets>
+				<selfTarget>
+					<areas>
+						<area affects="Tile" excludeRadius="0" radius="2">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addTrait name="AstraMilitarum/Commandement"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+			</beginTargets>
+		</genericUnitAbility>
+		<ichorBlood name="AstraMilitarum/TDC"
+				icon="Units/AstraMilitarum/TDC+"
+				cooldown="5"
+				requiredActionPoints="0"
+				consumedActionPoints="0">
+			<model>
+				<action sound="Actions/TDC"/>
+			</model>	
+			<beginTargets>
+				<target rangeMax="1">
+					<conditions>
+						<tile>
+							<land/>
+							<noUnit/>
+							<noFeature name="GravityWaves"/>
+						</tile>
+					</conditions>
+					<areas>
+						<area affects="Tile">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addUnit name="AstraMilitarum/TDC+" consumedAction="0" consumedMovement="0"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</target>
+			</beginTargets>
+		</ichorBlood>
+		<ichorBlood name="AstraMilitarum/BeaconKasrkinBendikt"
+				icon="Units/AstraMilitarum/Kasrkin"
+				cooldown="10"				
+				requiredActionPoints="0"
+				consumedActionPoints="0">
+			<model>
+				<action sound="Actions/TDC"/>
+			</model>
+			<modifiers>
+				<modifier>
+					<effects>
+						<influenceCost base="20"/>
+						<oreCost base="20"/>
+						<foodCost base="20"/>
+					</effects>
+				</modifier>
+			</modifiers>		
+			<beginTargets>
+				<target rangeMax="1">
+					<conditions>
+						<tile>
+							<land/>
+							<noUnit/>
+							<noFeature name="GravityWaves"/>
+						</tile>
+					</conditions>
+					<areas>
+						<area affects="Tile">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addUnit name="AstraMilitarum/Kasrkin" consumedAction="0" consumedMovement="0"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</target>
+			</beginTargets>
+		</ichorBlood>
+		<genericUnitAbility passive="1" 
+				name="AstraMilitarum/Ressource"
+				icon="Actions/AstraMilitarum/Ressource"				
+				levelUpPriority="0.15"
+				rank="-1"
+				rankMax="2">
+			<beginTargets>
+				<selfTarget>
+					<areas>
+						<area affects="Unit">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addTrait name="AstraMilitarum/Ressource"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+			</beginTargets>
+		</genericUnitAbility>
+		<healingTears cooldownMin="3" cooldownMax="1"
+				levelUpPriority="0.2"
+				rank="-1"
+				rankMax="2" 			
+				name="AstraMilitarum/Ordre"
+				icon="Actions/AstraMilitarum/Ordre"
+				requiredActionPoints="0"
+				consumedActionPoints="0">
+			<model>
+				<action sound="Actions/CaptureOutpost"/>
+			</model>
+			<beginTargets>
+				<target rangeMax="3">
+					<conditions>
+						<unit>
+							<allied/>
+							<noType name="AstraMilitarum/Bendikt"/>
+						</unit>
+					</conditions>
+					<areas>
+						<area affects="Unit">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addTrait duration="1" name="AstraMilitarum/Ordre"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</target>
+			</beginTargets>
+		</healingTears>
+		<genericUnitAbility passive="1" 
+				name="AstraMilitarum/MechanicalPackRat"
+				icon="Actions/AstraMilitarum/MechanicalPackRat"				
+				levelUpPriority="0.15"
+				rank="-1"
+				rankMax="2">
+			<beginTargets>
+				<selfTarget>
+					<areas>
+						<area affects="Unit">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addTrait name="AstraMilitarum/MechanicalPackRat"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+			</beginTargets>
+		</genericUnitAbility>
+		<hallucination cooldown="5"
+				elite="1"
+				levelUpPriority="1"
+				rank="-1"
+				rankMax="0"
+				name="AstraMilitarum/EnMarche"
+				icon="Actions/AstraMilitarum/EnMarche"
+				requiredActionPoints="0"
+				consumedActionPoints="0">
+			<model>
+				<action sound="Actions/EnMarche"/>
+			</model>
+			<beginTargets>
+				<selfTarget>
+					<areas>
+						<area affects="Unit" radius="3">
+							<modifiers>
+								<modifier>
+									<conditions>
+										<unit>
+											<allied/>
+										</unit>
+									</conditions>
+									<effects>
+										<addTrait duration="1" name="AstraMilitarum/EnMarche"/>
+										<addTrait duration="1" name="Fearless"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+			</beginTargets>
+		</hallucination>
+		<levelUp/>
+		<shop/>
+	</actions>
+	<traits>
+		<trait name="CamoNetting" requiredUpgrade="AstraMilitarum/CamoNetting"/>
+		<trait name="ExtraVehicleArmour" requiredUpgrade="AstraMilitarum/ExtraVehicleArmour"/>
+		<trait name="MoveThroughCover"/>
+		<trait name="RecoveryGear" requiredUpgrade="AstraMilitarum/RecoveryGear"/>
+		<trait name="RelicPlating" requiredUpgrade="AstraMilitarum/RelicPlating"/>
+		<trait name="SuperHeavy"/>
+		<trait name="Tank"/>
+		<trait name="Vehicle"/>
+		<trait name="Hero"/>
+		<trait name="Unique"/>
+		<trait name="AstraMilitarum/KnightOfPiety"/>
+		<trait name="AstraMilitarum/PièceMaitresse"/>
+	</traits>
+</unit>

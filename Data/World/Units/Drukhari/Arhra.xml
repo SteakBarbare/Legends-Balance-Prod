@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="utf-8"?>
+<unit dlc="Supplement13">
+	<model>
+		<unit mesh="Units/Drukhari/Incubi"
+				material="Units/Drukhari/Ahra"
+				scale="0.8 0.8 0.8"
+				idleAnimation="Units/Drukhari/IncubiIdle"
+				idleAnimationCount="3"
+				idleContinuously="1"
+				normalWeight="0.1"
+				portraitZoomModifier="1.25"
+				bloodBone="Chest"
+				walker="1"/>
+	</model>
+	<weapons>
+		<weapon name="Klaive">
+			<model>
+				<weapon fireInterval="0.4"/>
+			</model>
+		</weapon>
+	</weapons>
+	<modifiers>
+		<modifier visible="0">
+			<effects>
+				<armor base="8"/> <!-- %armor base armor=3+ -->
+				<foodUpkeep base="5.0"/> <!-- %foodUpkeep base tier=6 factor=1 -->
+				<foodCost base="100.0"/> <!-- %foodCost base tier=6 factor=0.5 -->
+				<hitpointsMax base="10.0"/> <!-- %hitpointsMax base toughness=3 wounds=1 -->
+				<meleeAccuracy base="10"/> <!-- %meleeAccuracy base weaponSkill=5 -->
+				<meleeAttacks base="3"/>
+				<strengthDamage base="1"/> <!-- %strengthDamage base strength=3 -->
+				<!-- <meleeInitiative base="5"/> -->
+				<oreCost base="100.0"/> <!-- %oreCost base tier=6 factor=0.5 -->
+				<moraleMax base="10"/> <!-- %moraleMax base leadership=8 -->
+				<movementMax base="3"/>
+				<itemSlots base="3"/>
+				<levelMax base="9"/>
+				<productionCost base="36.0"/> <!-- %productionCost base tier=6 factor=1 -->
+				<rangedAccuracy base="8"/> <!-- %rangedAccuracy base ballisticSkill=4 -->
+				<influenceUpkeep base="8.0"/> <!-- %influenceUpkeep base tier=7 factor=2 -->
+				<influenceCost base="200.0"/> <!-- %influenceCost base tier=7 factor=2 -->
+			</effects>
+		</modifier>
+	</modifiers>
+	<strategyModifiers>
+		<modifier>
+			<effects>
+				<increaseHeroesScore base="1.0"/>
+			</effects>
+		</modifier>
+	</strategyModifiers>
+	<actions>
+		<attack>
+			<model>
+				<action	chargeAnimation="Units/Drukhari/IncubiCharge"
+						meleeAnimation="Units/Drukhari/IncubiMelee"
+						meleeBeginSwing="0.45"
+						meleeEndSwing="0.95"/>
+			</model>
+		</attack>
+		<die>
+			<model>
+				<action animation="Units/Drukhari/IncubiDie"
+						animationCount="2"
+						sound="Units/MediumArmoredDie"
+						soundCount="4"
+						soundDelay="0.7"
+						voiceSound="Units/Drukhari/DrukhariInfantryDie"
+						voiceSoundCount="6"/>
+			</model>
+		</die>
+		<move>
+			<model>
+				<action animation="Units/Drukhari/IncubiMove"
+						sound="Units/AstraMilitarum/InfantryMove"
+						soundCount="4"/>
+			</model>
+		</move>
+		<webwayTravel name="Drukhari/WebwayTravel">
+			<model>
+				<action sound="Actions/WebwayTravel"/>
+			</model>
+			<modifiers>
+				<modifier visible="0">
+					<effects>
+						<influenceCost base="20"/>
+					</effects>
+				</modifier>
+				<modifier requiredUpgrade="Drukhari/WebwayTravelAction">
+					<effects>
+						<consumedActionPoints max="0"/>
+					</effects>
+				</modifier>
+			</modifiers>
+			<endTargets>
+				<target>
+					<areas>
+						<area affects="Unit">
+							<modifiers>
+								<modifier requiredUpgrade="Drukhari/ShroudGate">
+									<effects>
+										<addTrait duration="3" name="Drukhari/ShroudGate"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</target>
+			</endTargets>
+		</webwayTravel>
+		<combatDrugs consumedActionPoints="0" 
+				consumedMovement="0"
+				cooldown="10"
+				name="Drukhari/CombatDrugs"
+				requiredUpgrade="Drukhari/CombatDrugsUpgrade">
+			<model>
+				<action sound="Actions/CombatDrugs"/>
+			</model>
+			<modifiers>
+				<modifier visible="0">
+					<effects>
+						<influenceCost base="20"/>
+					</effects>
+				</modifier>
+			</modifiers>
+			<beginTargets>
+				<selfTarget>
+					<areas>
+						<area affects="Unit">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addTrait name="Drukhari/CombatDrugs" duration="10"/>
+									</effects>
+								</modifier>
+								<modifier requiredUpgrade="Drukhari/Hypex">
+									<effects>
+										<addTrait duration="10" name="MoveThroughCover"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+			</beginTargets>
+		</combatDrugs>
+		<auraOfFear passive="1">
+			<beginTargets>
+				<selfTarget>
+					<areas>
+						<area affects="Tile" excludeRadius="0" radius="2">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addTrait name="Fear"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+			</beginTargets>
+		</auraOfFear>
+		<returnToTheShadows cooldown="2"
+				name="Drukhari/Tromperie"
+				icon="Actions/Drukhari/Tromperie">
+			<model>
+				<action sound="Actions/ReturnToTheShadows"/>
+			</model>
+			<beginTargets>
+				<selfTarget>
+					<areas>
+						<area affects="Unit">
+							<modifiers>
+								<modifier>
+
+									<effects>
+										<addTrait duration="1" name="Drukhari/Tromperie"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+						<area affects="Unit" radius="1">
+							<modifiers>
+								<modifier>
+									<conditions>
+										<unit>
+											<enemy/>
+										</unit>
+									</conditions>
+									<effects>
+										<morale add="-3"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+			</beginTargets>
+		</returnToTheShadows>
+		<genericUnitAbility name="Drukhari/First"
+				icon="Actions/Drukhari/First"
+				passive="1">
+			<beginTargets>
+				<selfTarget>
+					<areas>
+						<area affects="Tile" radius="1" excludeRadius="0">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addTrait name="Drukhari/First"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+			</beginTargets>
+		</genericUnitAbility>
+		<genericUnitAbility name="Drukhari/Feed"
+				icon="Actions/Drukhari/Feed"
+				passive="1"
+				rank="-1"
+				rankMax="2"
+				levelUpPriority="0.2">
+			<beginTargets>
+				<selfTarget>
+					<areas>
+						<area affects="Unit">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addTrait name="Drukhari/Feed"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+			</beginTargets>
+		</genericUnitAbility>
+		<genericUnitAbility name="Drukhari/Tormentor"
+				icon="Actions/Drukhari/Tormentor"
+				passive="1"
+				rank="-1"
+				rankMax="2"
+				levelUpPriority="0.2">
+			<beginTargets>
+				<selfTarget>
+					<areas>
+						<area affects="Unit">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addTrait name="Drukhari/Tormentor"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+			</beginTargets>
+		</genericUnitAbility>
+		<ichorBlood cooldownMin="4" cooldownMax="2"
+				consumedActionPoints="0"
+				consumedMovement="0"
+				name="Drukhari/Murderous"
+				icon="Actions/Drukhari/Murderous"
+				rank="-1"
+				rankMax="2"
+				levelUpPriority="0.2"
+				requiredActionPoints="0">
+			<model>
+				<action animation="Units/Drukhari/IncubiMelee"
+						meleeBeginSwing="0.45"
+						meleeEndSwing="0.95"
+						sound="Actions/Dominate"/>
+			</model>
+			<conditions>
+				<unit>
+					<actionPoints equal="0"/>
+				</unit>
+			</conditions>
+			<beginTargets>
+				<selfTarget>
+					<areas>
+						<area affects="Unit">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addTrait name="Drukhari/Murderous" duration="1"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+			</beginTargets>
+		</splinteredGenius>
+		<whirlingDeath cooldown="3"
+				elite="1"
+				name="Drukhari/Tornado"
+				icon="Actions/Drukhari/Tornado"
+				levelUpPriority="1"
+				rank="-1"
+				rankMax="0">
+			<model>
+				<action animation="Units/Drukhari/IncubiMelee"
+						meleeBeginSwing="0.45"
+						meleeEndSwing="0.95"
+						bone="Chest"
+						sound="Actions/BloodDancer"/>
+			</model>
+			<beginTargets>
+				<selfTarget>
+					<areas>
+						<area affects="Unit" radius="1" excludeRadius="0">
+							<modifiers>
+								<modifier>
+									<conditions>
+										<unit>
+											<enemy/>
+											<noTrait name="Flyer"/>
+										</unit>
+									</conditions>
+									<effects>
+										<weaponDamage weapon="Tornado"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+			</beginTargets>
+		</whirlingDeath>
+		<levelUp/>
+		<shop/>
+	</actions>
+	<traits>
+		<trait name="ExtraInfantryArmour" requiredUpgrade="Drukhari/ExtraInfantryArmour"/>
+		<trait name="Fleet"/>
+		<trait name="Rampage"/>
+		<trait name="Hero"/>
+		<trait name="Unique"/>
+		<trait name="Drukhari/BladeArtists"/>
+		<trait name="Drukhari/PowerFromPain"/>
+		<trait name="Drukhari/RaidersTactics"/>
+		<trait name="Drukhari/RaidersTacticsHealingRate" requiredUpgrade="Drukhari/RaidersTacticsHealingRate"/>
+		<trait name="Drukhari/SoulHunger"/>
+		<trait name="Drukhari/Shadow"/>
+		<trait name="Drukhari/Phoenix"/>
+		<trait name="Drukhari/Hatred"/>
+		<trait name="Drukhari/HatredB"/>
+		<trait name="Drukhari/StrikeandFade"/>
+	</traits>
+</unit>
