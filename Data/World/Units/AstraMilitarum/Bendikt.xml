@@ -353,7 +353,7 @@
 				</selfTarget>
 			</beginTargets>
 		</genericUnitAbility>
-		<hallucination cooldown="5"
+		<hallucination cooldown="6"
 				elite="1"
 				levelUpPriority="1"
 				rank="-1"
