@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<unit dlc="Supplement5">
+	<model>
+		<structureUnit mesh="Units/Tau/Outpost+"
+				material="Units/Tau/Outpost+"
+				groundMaterial="Units/SpaceMarines/AquilaMacroCannonGround"
+				idleAnimation=""
+				idleAnimationCount="0"
+				heatImpactSound="Impacts/HeatConcrete"
+				heatImpactSoundCount="4"
+				kineticImpactSound="Impacts/KineticConcrete"
+				kineticImpactSoundCount="5"
+				scale="0.7 0.7 0.7"
+				explosionsBone="Base"
+				portraitFocusHeightModifier="16"/>
+	</model>
+	<weapons>
+		<weapon name="PulseRifle" count="2">
+			<model>
+				<projectileWeapon mesh="Units/Tau/OutpostPulseRifle+"
+						material="Units/Tau/Outpost+"
+						bone="Turret"
+						muzzleBone=".Pulse"
+						muzzleCount="2"/>
+			</model>
+		</weapon>
+	</weapons>
+	<modifiers>
+		<modifier visible="0">
+			<effects>
+				<armor base="8"/> <!-- %armor base armor=15/15/15 -->
+				<hitpointsMax base="36.0"/> <!-- %hitpointsMax base armor=15/15/15 wounds=4 -->
+				<moraleMax base="12"/> <!-- %moraleMax base leadership=9 -->
+				<movementMax max="0"/>
+				<rangedAttacks base="3"/>
+				<productionCost base="32.0"/> <!-- %productionCost base tier=11 factor=1 --> 
+				<rangedAccuracy base="8"/> <!-- %rangedAccuracy base ballisticSkill=4 -->
+				<oreUpkeep base="2"/> <!-- %oreUpkeep base tier=8 factor=1 -->
+				<energyUpkeep base="2"/>
+			</effects>
+		</modifier>
+	</modifiers>
+	<actions>
+		<attack>
+			<model>
+				<action beginFire="0.15" endFire="2.6"/>
+			</model>
+		</attack>
+		<die>
+			<model>
+				<action sound="Units/HeavyBuildingDie"
+						soundCount="3"/>
+			</model>
+		</die>
+		<ichorBlood icon="Units/Tau/OutpostRailgun+"
+				name="Tau/OutpostRailgun+"
+				cooldown="1"
+				cooldownRemaining="5">
+			<model>
+				<action sound="Actions/DeployDrone"/>
+			</model>
+			<conditions>
+				<unit>
+					<hitpointsFraction greater="0.75"/>
+				</unit>
+			</conditions>
+			<beginTargets>
+				<selfTarget>
+					<areas>
+						<area affects="Unit">
+							<modifiers>
+								<modifier>
+									<effects>
+										<removeUnit/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+				<selfTarget>
+					<areas>
+						<area affects="Tile">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addUnit name="Tau/OutpostRailgun+"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+			</beginTargets>
+		</ichorBlood>
+		<ichorBlood icon="Units/Tau/OutpostRocket+"
+				name="Tau/OutpostRocket+"
+				cooldown="1"
+				cooldownRemaining="5">
+			<model>
+				<action sound="Actions/DeployDrone"/>
+			</model>
+			<conditions>
+				<unit>
+					<hitpointsFraction greater="0.75"/>
+				</unit>
+			</conditions>
+			<beginTargets>
+				<selfTarget>
+					<areas>
+						<area affects="Unit">
+							<modifiers>
+								<modifier>
+									<effects>
+										<removeUnit/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+				<selfTarget>
+					<areas>
+						<area affects="Tile">
+							<modifiers>
+								<modifier>
+									<effects>
+										<addUnit name="Tau/OutpostRocket+"/>
+									</effects>
+								</modifier>
+							</modifiers>
+						</area>
+					</areas>
+				</selfTarget>
+			</beginTargets>
+		</ichorBlood>
+	</actions>
+	<traits>
+		<trait name="Fortification"/>
+		<trait name="ExtraVehicleArmour" requiredUpgrade="Tau/ExtraVehicleArmour"/>
+		<trait name="Tau/Loyalty+"/>
+		<trait name="HarvestResourceFeatures" requiredUpgrade="Tau/HarvestResourceFeatures+"/>
+		<trait name="Tau/AdvancedTargetingSystem" requiredUpgrade="Tau/AdvancedTargetingSystem"/>
+		<trait name="Tau/AutomatedRepairSystem" requiredUpgrade="Tau/AutomatedRepairSystem"/>
+		<trait name="Tau/BlacksunFilter" requiredUpgrade="Tau/BlacksunFilter"/>
+		<trait name="Tau/DisruptionPod" requiredUpgrade="Tau/DisruptionPod"/>
+		<trait name="Tau/FlechetteDischarger" requiredUpgrade="Tau/FlechetteDischarger"/>
+		<trait name="Tau/PointDefenceTargetingRelay" requiredUpgrade="Tau/PointDefenceTargetingRelay"/>
+	</traits>
+</unit>
