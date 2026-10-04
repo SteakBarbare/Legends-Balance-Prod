@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trait category="Buff">
+	<modifiers>
+		<modifier>
+			<conditions>
+				<unit>
+					<noType name="Necrons/ScarabBuilder+"/>
+					<noType name="Necrons/CanoptekWraith"/>
+					<noType name="Necrons/HeavyDestroyer"/>
+					<noType name="Necrons/SkorpekhDestroyer"/>
+					<noType name="Necrons/Hexmark+"/>
+					<noType name="Necrons/HexmarkDestroyer"/>
+					<noType name="Necrons/Apprentek+"/>
+				</unit>
+			</conditions>
+			<effects>
+				<groupSizeMax add="4"/>
+				<oreUpkeep mul="3"/>
+			</effects>
+		</modifier>
+		<modifier>
+			<conditions>
+				<unit match="Any">
+					<type name="Necrons/CanoptekWraith"/>
+					<type name="Necrons/HeavyDestroyer"/>
+					<type name="Necrons/HexmarkDestroyer"/>
+					<type name="Necrons/Hexmark+"/>
+				</unit>
+			</conditions>
+			<effects>
+				<groupSizeMax add="2"/>
+				<oreUpkeep mul="3"/>
+			</effects>
+		</modifier>
+		<modifier>
+			<conditions>
+				<unit match="Any">
+					<type name="Necrons/ScarabBuilder+"/>
+					<type name="Necrons/SkorpekhDestroyer"/>
+					<type name="Necrons/Apprentek+"/>
+				</unit>
+			</conditions>
+			<effects>
+				<groupSizeMax add="3"/>
+				<oreUpkeep mul="3"/>
+			</effects>
+		</modifier>
+	</modifiers>
+</trait>

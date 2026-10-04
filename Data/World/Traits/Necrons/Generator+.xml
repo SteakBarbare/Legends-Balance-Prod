@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trait alwaysVisible="1" category="Buff" icon="Attributes/Energy">
+	<modifiers>
+		<modifier>
+			<conditions>
+				<unit>
+					<trait name="Necrons/BuildingArea+"/>
+				</unit>
+			</conditions>
+			<effects>
+				<energy add="6"/>
+			</effects>
+		</modifier>
+		<modifier requiredUpgrade="Necrons/EnergyBuildingBonus">
+			<effects>
+				<energy add="3"/>
+			</effects>
+		</modifier>
+	</modifiers>
+	<onUnitDisappeared>
+		<area affects="Unit" radius="1">
+			<modifiers>
+				<modifier visible="0">
+					<conditions>
+						<unit match="Any">
+							<trait name="Vehicle"/>
+							<trait name="Fortification"/>
+							<trait name="MonstrousCreature"/>
+						</unit>
+					</conditions>
+					<effects>
+						<hitpointsFactorFromMax add="-0.10"/>	
+					</effects>
+				</modifier>
+				<modifier visible="0">
+					<conditions>
+						<unit>
+							<noTrait name="Vehicle"/>
+							<noTrait name="Fortification"/>
+							<noTrait name="MonstrousCreature"/>
+						</unit>
+					</conditions>
+					<effects>
+						<hitpointsFactorFromMax add="-0.25"/>	
+					</effects>
+				</modifier>
+			</modifiers>
+		</area>
+	</onUnitDisappeared>
+</trait>
